@@ -3,11 +3,14 @@ package ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori;
 import java.util.Random;
 
 public class Block {
+    public static final int MAX_VALUE = 9;
     private int value;
     private Color color;
 
-    public Block() {
-        this.value = new Random().nextInt(1, 10);
+    public Block(int value) {
+        if (0 <= value && value <= MAX_VALUE) {
+            this.value = value;
+        }
         assignColor(this.value);
     }
 
@@ -20,14 +23,16 @@ public class Block {
     }
 
     public final void setValue(int value) {
-        this.value = value;
+        if (0 <= value && value <= MAX_VALUE) {
+            this.value = value;
+        }
     }
 
     public void setColor(Color color) {
         this.color = color;
     }
 
-    private final void assignColor(int value) {
+    public final void assignColor(int value) {
         switch (value) {
             case 1:
                 setColor(Color.BLUE);
@@ -57,18 +62,17 @@ public class Block {
                 setColor(Color.BROWN);
                 break;
             default:
-                setColor(Color.WHITE);
+                setColor(Color.WHITE); // colour for value 0
                 break;
         }
     }
 
     public static void main(String[] args) {
         for (int i = 0; i < 100; i++) {
-            Block block = new Block();
+            Block block = new Block(new Random().nextInt(1, 10));
             int value = block.getValue();
             Color color = block.getColor();
             System.out.printf("Value %s: %s\n", value, color);
         }
     }
-
 }
