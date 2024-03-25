@@ -44,11 +44,11 @@ public class Block {
         this.color = color;
     }
 
-    public void setAlive(boolean isAlive) {
+    public void setIsAlive(boolean isAlive) {
         this.isAlive = isAlive;
     }
 
-    public void setMoving(boolean isMoving) {
+    public void setIsMoving(boolean isMoving) {
         this.isMoving = isMoving;
     }
 
