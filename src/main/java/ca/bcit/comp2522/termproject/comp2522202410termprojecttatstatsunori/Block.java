@@ -6,12 +6,16 @@ public class Block {
     public static final int MAX_VALUE = 9;
     private int value;
     private Color color;
+    private boolean isAlive;
+    private boolean isMoving;
 
     public Block(int value) {
         if (0 <= value && value <= MAX_VALUE) {
             this.value = value;
         }
         assignColor(this.value);
+        this.isAlive = true;
+        this.isMoving = false;
     }
 
     public int getValue() {
@@ -22,6 +26,14 @@ public class Block {
         return this.color;
     }
 
+    public boolean getIsAlive() {
+        return this.isAlive;
+    }
+
+    public boolean getIsMoving() {
+        return this.isMoving;
+    }
+
     public final void setValue(int value) {
         if (0 <= value && value <= MAX_VALUE) {
             this.value = value;
@@ -30,6 +42,14 @@ public class Block {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public void setAlive(boolean isAlive) {
+        this.isAlive = isAlive;
+    }
+
+    public void setMoving(boolean isMoving) {
+        this.isMoving = isMoving;
     }
 
     public final void assignColor(int value) {
