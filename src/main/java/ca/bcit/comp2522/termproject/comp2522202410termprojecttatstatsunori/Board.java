@@ -59,4 +59,24 @@ public class Board {
             this.blocks[coordinates[0]][coordinates[1]] = block;
         }
     }
+
+
+    /**
+     * Remove specified Block if it exists on this board, and return the number of removed Blocks.
+     *
+     * @param blockToRemove an instance of Block
+     * @return an int that represents the number of removed Blocks
+     */
+    public int removeBlock(final Block blockToRemove) {
+        int removedBlocks = 0;
+        for (int x = 0; x < this.blocks.length; x++) {
+            for (int y = 0; y < this.blocks[x].length; y++) {
+                if (this.blocks[x][y] == blockToRemove) {
+                   this.blocks[x][y] = null;
+                   removedBlocks++;
+                }
+            }
+        }
+        return removedBlocks;
+    }
 }
