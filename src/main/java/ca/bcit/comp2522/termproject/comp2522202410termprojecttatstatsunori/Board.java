@@ -46,17 +46,17 @@ public class Board {
      * Place given block to given coordinates.
      *
      * @param block an instance of Block
-     * @param coordinates an array of int which represents an existing coordinates on this board
-     * @throws IllegalArgumentException when the length of coordinates is not two
+     * @param xCoordinate an int between 0 and WIDTH - 1
+     * @param yCoordinate an int between 0 and HEIGHT - 1
      * @throws IllegalArgumentException when coordinates does not exist on this board
      */
-    public void placeBlock(final Block block, final int[] coordinates) {
-        if (coordinates.length != 2) {
-            throw new IllegalArgumentException("the length of coordinates must be two");
-        } else if (coordinates[0] < 0 || coordinates[0] >= WIDTH || coordinates[1] < 0 || coordinates[1] >= HEIGHT) {
+    public void placeBlock(final Block block, final int xCoordinate, final int yCoordinate) {
+        if (xCoordinate < 0 || xCoordinate >= WIDTH || yCoordinate < 0 || yCoordinate >= HEIGHT) {
             throw new IllegalArgumentException("coordinates must exist on this board");
         } else {
-            this.blocks[coordinates[0]][coordinates[1]] = block;
+            this.blocks[xCoordinate][yCoordinate] = block;
+            block.setXCoordinate(xCoordinate);
+            block.setYCoordinate(yCoordinate);
         }
     }
 
@@ -68,15 +68,33 @@ public class Board {
      * @return an int that represents the number of removed Blocks
      */
     public int removeBlock(final Block blockToRemove) {
-        int removedBlocks = 0;
-        for (int x = 0; x < this.blocks.length; x++) {
-            for (int y = 0; y < this.blocks[x].length; y++) {
-                if (this.blocks[x][y] == blockToRemove) {
-                   this.blocks[x][y] = null;
-                   removedBlocks++;
-                }
-            }
+        int xCoordinate = blockToRemove.getXCoordinate();
+        int yCoordinate = blockToRemove.getYCoordinate();
+        if (this.blocks[xCoordinate][yCoordinate] == blockToRemove) {
+            this.blocks[xCoordinate][yCoordinate] = null;
+            return 1;
         }
-        return removedBlocks;
+        return 0;
+    }
+
+    public void validateMove (final )
+
+    public void moveBlockByOne(final Block block, final Direction direction) {
+        int[] coordinatesToMoveBy = {0, 0};
+        switch (direction) {
+            case LEFT:
+                coordinatesToMoveBy[0] = -1;
+                break;
+            case RIGHT:
+                coordinatesToMoveBy[0] = 1;
+                break;
+            case UP:
+                coordinatesToMoveBy[1] = 1;
+                break;
+            case DOWN:
+                coordinatesToMoveBy[1] = -1;
+                break;
+        }
+        if ()
     }
 }
