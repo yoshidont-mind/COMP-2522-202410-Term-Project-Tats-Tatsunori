@@ -118,6 +118,41 @@ public class Board {
         }
     }
 
+    /**
+     * Moves given Block to given Direction
+     *
+     * @param block an instance of Block
+     * @param direction a Direction
+     */
     public void moveBlockByOne(final Block block, final Direction direction) {
+        int xCoordinate = block.getXCoordinate();
+        int yCoordinate = block.getYCoordinate();
+        if (validateMove(xCoordinate, yCoordinate, direction)) {
+            int[] coordinatesToMoveBy = this.coordinatesToMoveBy(direction);
+            int newXCoordinate = xCoordinate + coordinatesToMoveBy[0];
+            int newYCoordinate = yCoordinate + coordinatesToMoveBy[1];
+
+            // move block
+            this.blocks[xCoordinate][yCoordinate] = null;
+            this.blocks[newXCoordinate][newYCoordinate] = block;
+
+            // update coordinates of block
+            block.setXCoordinate(newXCoordinate);
+            block.setYCoordinate(newYCoordinate);
+        }
+    }
+
+    public int moveBlocks(final Direction direction) {
+    }
+
+    private int seeOneDirection(final int xCoordinate, int yCoordinate, final Direction direction) {
+    }
+
+    private int removeDeadBlocks(final int xCoordinate, int yCoordinate) {
+
+    }
+
+    public int processEliminating() {
+
     }
 }
