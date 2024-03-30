@@ -98,5 +98,7 @@ public class Session {
         this.gameSpeed = gameSpeed;
     }
 
-
+    /* general purpose methods */
+    public void updateDisplay() {
+    }
 }
