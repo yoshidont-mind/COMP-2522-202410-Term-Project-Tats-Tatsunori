@@ -224,11 +224,40 @@ public class Board {
         }
     }
 
-    private int removeDeadBlocks(final int xCoordinate, int yCoordinate) {
-
+    /* Removes dead blocks. */
+    private int removeDeadBlocks() {
+        int removedBlocks = 0;
+        for (int xCoordinate = 0; xCoordinate < WIDTH; xCoordinate++) {
+            for (int yCoordinate = 0; yCoordinate < HEIGHT; yCoordinate++) {
+                Block currentBlock = this.blocks[xCoordinate][yCoordinate];
+                if (!currentBlock.getIsAlive()) {
+                    removeBlock(currentBlock);
+                    removedBlocks++;
+                }
+            }
+        }
+        return removedBlocks;
     }
 
-    public int processEliminating() {
-
+    /**
+     * Processes elimination starting from given coordinates.
+     *
+     * @param xCoordinate an int between 0 and WIDTH - 1
+     * @param yCoordinate an int between 0 and HEIGHT - 1
+     * @throws IllegalArgumentException when given coordinates does not exist on this board
+     * @throws IllegalArgumentException when a block does not exist at given coordinates
+     * @return an int that represents number of removed blocks
+     */
+    public int processEliminating(final int xCoordinate, int yCoordinate) {
+        if (xCoordinate < 0 || xCoordinate >= WIDTH || yCoordinate < 0 || yCoordinate >= HEIGHT) {
+            throw new IllegalArgumentException("coordinates must exist on this board");
+        } else if (this.blocks[xCoordinate][yCoordinate] == null) {
+            throw new IllegalArgumentException("There must exist a block at given coordinates");
+        } else {
+            this.seeOneDirection(xCoordinate, yCoordinate, Direction.LEFT);
+            this.seeOneDirection(xCoordinate, yCoordinate, Direction.RIGHT);
+            this.seeOneDirection(xCoordinate, yCoordinate, Direction.DOWN);
+            return removeDeadBlocks();
+        }
     }
 }
