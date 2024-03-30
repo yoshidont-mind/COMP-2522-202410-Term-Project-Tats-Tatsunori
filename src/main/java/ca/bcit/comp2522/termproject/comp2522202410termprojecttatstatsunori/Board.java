@@ -119,12 +119,13 @@ public class Board {
     }
 
     /**
-     * Moves given Block to given Direction
+     * Moves given Block to given Direction, and returns 1 if it moved, else 0.
      *
      * @param block an instance of Block
      * @param direction a Direction
+     * @return 1 if block moved, else 0
      */
-    public void moveBlockByOne(final Block block, final Direction direction) {
+    public int moveBlockByOne(final Block block, final Direction direction) {
         int xCoordinate = block.getXCoordinate();
         int yCoordinate = block.getYCoordinate();
         if (validateMove(xCoordinate, yCoordinate, direction)) {
@@ -139,10 +140,25 @@ public class Board {
             // update coordinates of block
             block.setXCoordinate(newXCoordinate);
             block.setYCoordinate(newYCoordinate);
+            return 1;
         }
+        return 0;
     }
 
+    /**
+     * Moves all blocks on board to given direction, and returns number of blocks moved.
+     *
+     * @param direction a Direction
+     * @return number of blocks moved
+     */
     public int moveBlocks(final Direction direction) {
+        int movedBlocks = 0;
+        for (int xCoordinate = 0; xCoordinate < WIDTH; xCoordinate++) {
+            for (int yCoordinate = 0; yCoordinate < HEIGHT; yCoordinate++) {
+                movedBlocks += moveBlockByOne(this.blocks[xCoordinate][yCoordinate], direction);
+            }
+        }
+        return movedBlocks;
     }
 
     private int seeOneDirection(final int xCoordinate, int yCoordinate, final Direction direction) {
