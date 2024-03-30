@@ -11,7 +11,6 @@ public class Session {
     private Board board;
 
     /* constructors */
-
     /**
      * Constructs an instance of Session without accepting parameters.
      */
@@ -21,5 +20,52 @@ public class Session {
         this.isFinished = false;
         this.gameSpeed = 1.0;
         this.board = new Board();
+    }
+
+    /* getters */
+
+    /**
+     * Returns startTime of this Session.
+     *
+     * @return a LocalDateTime
+     */
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    /**
+     * Returns score of this session
+     *
+     * @return an int
+     */
+    public int getScore() {
+        return score;
+    }
+
+    /**
+     * Returns whether this session has finished
+     *
+     * @return a boolean
+     */
+    public boolean isFinished() {
+        return isFinished;
+    }
+
+    /**
+     * Returns gameSpeed of this session.
+     *
+     * @return a double
+     */
+    public double getGameSpeed() {
+        return gameSpeed;
+    }
+
+    /**
+     * Returns board of this session.
+     *
+     * @return a Board
+     */
+    public Board getBoard() {
+        return board;
     }
 }
