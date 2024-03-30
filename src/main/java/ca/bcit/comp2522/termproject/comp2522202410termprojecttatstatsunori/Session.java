@@ -34,7 +34,7 @@ public class Session {
     }
 
     /**
-     * Returns score of this session
+     * Returns score of this Session
      *
      * @return an int
      */
@@ -43,7 +43,7 @@ public class Session {
     }
 
     /**
-     * Returns whether this session has finished
+     * Returns whether this Session has finished
      *
      * @return a boolean
      */
@@ -52,7 +52,7 @@ public class Session {
     }
 
     /**
-     * Returns gameSpeed of this session.
+     * Returns gameSpeed of this Session.
      *
      * @return a double
      */
@@ -61,11 +61,42 @@ public class Session {
     }
 
     /**
-     * Returns board of this session.
+     * Returns board of this Session.
      *
      * @return a Board
      */
     public Board getBoard() {
         return board;
     }
+
+    /* setters */
+
+    /**
+     * Sets score of this Session to given value.
+     *
+     * @param score an int
+     */
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    /**
+     * Sets isFinished of this Session to given value.
+     *
+     * @param isFinished a boolean
+     */
+    public void setFinished(boolean isFinished) {
+        this.isFinished = isFinished;
+    }
+
+    /**
+     * Sets gameSpeed of this Session to given value.
+     *
+     * @param gameSpeed a double
+     */
+    public void setGameSpeed(double gameSpeed) {
+        this.gameSpeed = gameSpeed;
+    }
+
+
 }
