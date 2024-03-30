@@ -26,7 +26,7 @@ public class Board {
     /**
      * Constructs an instance of Board without accepting parameters.
      */
-    public Board() {};
+    public Board() {this.blocks = new Block[WIDTH][HEIGHT];};
 
     /**
      * Constructs an instance of Board with accepting parameters.
