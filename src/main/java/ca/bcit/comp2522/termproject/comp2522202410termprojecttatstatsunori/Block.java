@@ -6,6 +6,8 @@ import java.util.Random;
 public class Block {
     public static final int MAX_VALUE = 9;
     private int value;
+    private int xCoordinate;
+    private int yCoordinate;
     private Color color;
     private boolean isAlive;
     private boolean isMoving;
@@ -22,6 +24,8 @@ public class Block {
     public int getValue() {
         return this.value;
     }
+    public int getXCoordinate() {return this.xCoordinate;}
+    public int getYCoordinate(){return this.yCoordinate;}
 
     public Color getColor() {
         return this.color;
@@ -39,6 +43,14 @@ public class Block {
         if (0 <= value && value <= MAX_VALUE) {
             this.value = value;
         }
+    }
+
+    public final void setXCoordinate(final int xCoordinate) {
+        this.xCoordinate = xCoordinate;
+    }
+
+    public final void setYCoordinate(final int yCoordinate) {
+        this.yCoordinate = yCoordinate;
     }
 
     public void setColor(Color color) {
