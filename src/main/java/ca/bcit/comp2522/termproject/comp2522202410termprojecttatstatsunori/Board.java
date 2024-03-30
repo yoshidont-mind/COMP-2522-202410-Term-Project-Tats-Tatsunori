@@ -48,7 +48,7 @@ public class Board {
      * @param block an instance of Block
      * @param xCoordinate an int between 0 and WIDTH - 1
      * @param yCoordinate an int between 0 and HEIGHT - 1
-     * @throws IllegalArgumentException when coordinates does not exist on this board
+     * @throws IllegalArgumentException when given coordinates does not exist on this board
      */
     public void placeBlock(final Block block, final int xCoordinate, final int yCoordinate) {
         if (xCoordinate < 0 || xCoordinate >= WIDTH || yCoordinate < 0 || yCoordinate >= HEIGHT) {
@@ -77,9 +77,8 @@ public class Board {
         return 0;
     }
 
-    public void validateMove (final )
-
-    public void moveBlockByOne(final Block block, final Direction direction) {
+    /* Returns coordinates to move by as an array of int */
+    private int[] coordinatesToMoveBy (final Direction direction) {
         int[] coordinatesToMoveBy = {0, 0};
         switch (direction) {
             case LEFT:
@@ -95,6 +94,30 @@ public class Board {
                 coordinatesToMoveBy[1] = -1;
                 break;
         }
-        if ()
+        return coordinatesToMoveBy;
+    }
+
+    /**
+     * Return if the block at given coordinates can move to given direction.
+     *
+     * @param xCoordinate an int between 0 and WIDTH - 1
+     * @param yCoordinate an int between 0 and HEIGHT - 1
+     * @param direction an instance of Direction
+     * @throws IllegalArgumentException when given coordinates does not exist on this board
+     * @return a boolean that represents if the block at given coordinates can move to given direction
+     */
+    public boolean validateMove (final int xCoordinate, int yCoordinate, final Direction direction) {
+        if (xCoordinate < 0 || xCoordinate >= WIDTH || yCoordinate < 0 || yCoordinate >= HEIGHT) {
+            throw new IllegalArgumentException("coordinates must exist on this board");
+        } else {
+            int[] coordinatesToMoveBy = this.coordinatesToMoveBy(direction);
+            int newXCoordinate = xCoordinate + coordinatesToMoveBy[0];
+            int newYCoordinate = yCoordinate + coordinatesToMoveBy[1];
+            return  (0 <= newXCoordinate && newXCoordinate < WIDTH && 0 <= newYCoordinate && newYCoordinate < HEIGHT
+                    || this.blocks[newXCoordinate][newYCoordinate] == null);
+        }
+    }
+
+    public void moveBlockByOne(final Block block, final Direction direction) {
     }
 }
