@@ -1,9 +1,23 @@
 package main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori;
 
+import java.util.ArrayList;
+
 public class Board {
     /* constants */
+    /**
+     * The height of boards
+     */
     public static final int HEIGHT = 11;
+
+    /**
+     * The width of boards
+     */
     public static final int WIDTH = 5;
+
+    /**
+     * The value for the condition used to remove blocks
+     */
+    public static final int OBJECTIVE_SUM = 10;
 
     /* instance variables */
     private Block[][] blocks;
@@ -161,7 +175,53 @@ public class Board {
         return movedBlocks;
     }
 
+    /**
+     * Checks one direction from given coordinates, and kill blocks if the condition is met.
+     *
+     * @param xCoordinate an int between 0 and WIDTH - 1
+     * @param yCoordinate an int between 0 and HEIGHT - 1
+     * @param direction a Direction
+     * @throws IllegalArgumentException when given coordinates does not exist on this board
+     * @throws IllegalArgumentException when a block does not exist at given coordinates
+     * @return an int that represents the number of killed blocks
+     */
     private int seeOneDirection(final int xCoordinate, int yCoordinate, final Direction direction) {
+        if (xCoordinate < 0 || xCoordinate >= WIDTH || yCoordinate < 0 || yCoordinate >= HEIGHT) {
+            throw new IllegalArgumentException("coordinates must exist on this board");
+        } else if (this.blocks[xCoordinate][yCoordinate] == null) {
+            throw new IllegalArgumentException("There must exist a block at given coordinates");
+        } else {
+            // initialize local variables
+            int sum = 0;
+            int currentX = xCoordinate;
+            int currentY = yCoordinate;
+            ArrayList<Block> checkedBlocks = new ArrayList<>();
+
+            // add value of next block one by one until sum becoming OBJECTIVE_SUM, reaching no-block-coordinates, or reaching wall
+            while (0 <= currentX && currentX < WIDTH && 0 <= currentY && currentY < HEIGHT
+                    && this.blocks[currentX][currentY] != null) {
+                Block currentBlock = this.blocks[currentX][currentY];
+                sum += currentBlock.getValue();
+                checkedBlocks.add(currentBlock);
+
+                // if sum is 0, kill all checked blocks and return total number of killed blocks
+                if (sum == OBJECTIVE_SUM) {
+                    int killedBlocks = 0;
+                    for (Block block: checkedBlocks) {
+                        block.setIsAlive(false);
+                        killedBlocks++;
+                    }
+                    return killedBlocks;
+                }
+
+                // modify current coordinates to check next block
+                currentX += this.coordinatesToMoveBy(direction)[0];
+                currentY += this.coordinatesToMoveBy(direction)[1];
+            }
+
+            // if sum never be OBJECTIVE_SUM, return 0
+            return 0;
+        }
     }
 
     private int removeDeadBlocks(final int xCoordinate, int yCoordinate) {
