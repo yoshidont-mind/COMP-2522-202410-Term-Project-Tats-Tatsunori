@@ -1,5 +1,6 @@
 package main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -26,16 +27,13 @@ public class Session extends Application {
     private int score;
 
     private Text scoreText;
-
     private Text timeText;
-
-    private int linesNumber;
-    private int timeOnTop;
     private boolean isFinished;
     private double gameSpeed;
     private final Board board;
     private Scene scene;
     private Pane group;
+    private Timer fallTimer;
 
     /* constructors */
     /**
@@ -47,8 +45,6 @@ public class Session extends Application {
         this.isFinished = false;
         this.gameSpeed = 1.0;
         this.board = new Board();
-        this.timeOnTop = 0;
-        this.linesNumber = 0;
         this.group = new Pane();
         this.scene = new Scene(group, MAX_X + 150, MAX_Y);
     }
@@ -133,7 +129,7 @@ public class Session extends Application {
     public void updateDisplay() {
         scoreText.setText("Score: " + score);
         Duration duration = Duration.between(startTime, LocalDateTime.now());
-        timeText.setText("Time: " + formatDuration(duration));
+       // timeText.setText("Time: " + formatDuration(duration));
     }
 
     private void initializeUIComponents(Pane group) {
@@ -151,48 +147,6 @@ public class Session extends Application {
         group.getChildren().addAll(scoreText, line, timeText);
     }
 
-    private void startGameLoop(Block initialBlock) {
-        Timer fallTimer = new Timer();
-        fallTimer.scheduleAtFixedRate(new TimerTask() {
-            Block currentBlock = initialBlock;
-
-            @Override
-            public void run() {
-                Platform.runLater(() -> {
-                    if (!isFinished) {
-                        if (!board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.DOWN)) {
-                            currentBlock = Block.createBlock();
-                            board.placeBlock(currentBlock, Board.WIDTH / 2 - 1, 0);
-                        } else {
-                            board.moveBlockByOne(currentBlock, Direction.DOWN);
-                        }
-                        board.drawBoard(group);
-                        updateDisplay();
-                    }
-                });
-            }
-        }, 0, 300);
-    }
-
-    private void updateGameState(Block block) {
-        if (!isFinished) {
-            if (!board.validateMove(block.getXCoordinate(), block.getYCoordinate(), Direction.DOWN)) {
-                block = Block.createBlock();
-                board.placeBlock(block, Board.WIDTH / 2 - 1, 0);
-            }
-            board.moveBlockByOne(block, Direction.DOWN);
-            board.drawBoard(group);
-        }
-    }
-
-    private String formatDuration(Duration duration) {
-        long seconds = duration.getSeconds();
-        long absSeconds = Math.abs(seconds);
-        return String.format(
-                "%d:%02d",
-                absSeconds / 60,
-                absSeconds % 60);
-    }
 
     private void moveOnKeyPress (Block block) {
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -204,31 +158,50 @@ public class Session extends Application {
                     case UP -> board.moveBlockByOne(block, Direction.UP);
                     case DOWN -> board.moveBlockByOne(block, Direction.DOWN);
                 }
-                board.drawBoard(group);
             }
         });
     }
 
     public void start(Stage stage) {
-        initializeUIComponents(group);
+        group = new Pane();
+        Scene scene = new Scene(group, MAX_X + 150, MAX_Y);
 
-        Block block = Block.createBlock();
-        final int startX = Board.WIDTH / 2 - 1;
-        board.placeBlock(block, startX, 0);
+        Block currentBlock = Block.createBlock();
+        board.placeBlock(currentBlock, Board.WIDTH / 2, 0);
         board.drawBoard(group);
-        moveOnKeyPress(block);
 
         stage.setScene(scene);
         stage.setTitle("Numbered Tetris");
         stage.show();
 
-        startGameLoop(block);
+        new AnimationTimer() {
+            public void handle(long currentNanoTime) {
+                if (!isFinished) {
+                    gameLoop(currentBlock);
+                } else {
+                    this.stop();
+                }
+            }
+        }.start();
+    }
+
+    private void gameLoop(Block currentBlock) {
+        if (!board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.DOWN)) {
+            currentBlock = Block.createBlock();
+            board.placeBlock(currentBlock, Board.WIDTH / 2, 0);
+        } else {
+            board.moveBlockByOne(currentBlock, Direction.DOWN);
+        }
+
+        if (!board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.DOWN)
+                && !board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.UP)) {
+            isFinished = true;
+        }
+
+        board.drawBoard(group);
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
-
-
-
 }
