@@ -1,14 +1,50 @@
 package main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori;
 
-import java.time.LocalDateTime;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
-public class Session {
+import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static javafx.util.Duration.*;
+
+public class Session extends Application {
     /* instance variables */
+
+    public static int MOVE = 25;
+    public static final int SIZE = 50;
+    public static int MAX_X = Board.WIDTH * SIZE;
+    public static int MAX_Y = Board.HEIGHT * SIZE;
+
+    private Pane group;
+
+    private Scene scene;
+
     private LocalDateTime startTime;
     private int score;
+
+    private Text scoreText;
+
+    private Text timeText;
+
+    private int linesNumber;
+    private int timeOnTop;
     private boolean isFinished;
     private double gameSpeed;
     private Board board;
+
 
     /* constructors */
     /**
@@ -20,6 +56,10 @@ public class Session {
         this.isFinished = false;
         this.gameSpeed = 1.0;
         this.board = new Board();
+        this.timeOnTop = 0;
+        this.linesNumber = 0;
+        this.group = new Pane();
+        this.scene = new Scene(group, MAX_X + 150, MAX_Y);
     }
 
     /* getters */
@@ -100,5 +140,104 @@ public class Session {
 
     /* general purpose methods */
     public void updateDisplay() {
+        scoreText.setText("Score: " + score);
+        Duration duration = Duration.between(startTime, LocalDateTime.now());
+        timeText.setText("Time: " + formatDuration(duration));
     }
+
+    private void initializeUIComponents(Pane group) {
+        Line line = new Line(MAX_X, 0, MAX_X, MAX_Y);
+        this.scoreText = new Text("Score: ");
+        scoreText.setStyle("-fx-font: 20 arials;");
+        scoreText.setY(50);
+        scoreText.setX(MAX_X + 5);
+
+        timeText = new Text("Time: 0");
+        timeText.setStyle("-fx-font: 20 arial;");
+        timeText.setY(80);
+        timeText.setX(MAX_X + 5);
+
+        group.getChildren().addAll(scoreText, line, timeText);
+    }
+
+    private void startGameLoop(Block initialBlock) {
+        Timer fallTimer = new Timer();
+        fallTimer.scheduleAtFixedRate(new TimerTask() {
+            Block currentBlock = initialBlock;
+
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    if (!isFinished) {
+                        if (!board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.DOWN)) {
+                            currentBlock = Block.createBlock();
+                            board.placeBlock(currentBlock, Board.WIDTH / 2 - 1, 0);
+                        } else {
+                            board.moveBlockByOne(currentBlock, Direction.DOWN);
+                        }
+                        board.drawBoard(group);
+                        updateDisplay();
+                    }
+                });
+            }
+        }, 0, 300);
+    }
+
+    private void updateGameState(Block block) {
+        if (!isFinished) {
+            if (!board.validateMove(block.getXCoordinate(), block.getYCoordinate(), Direction.DOWN)) {
+                block = Block.createBlock();
+                board.placeBlock(block, Board.WIDTH / 2 - 1, 0);
+            }
+            board.moveBlockByOne(block, Direction.DOWN);
+            board.drawBoard(group);
+        }
+    }
+
+    private String formatDuration(Duration duration) {
+        long seconds = duration.getSeconds();
+        long absSeconds = Math.abs(seconds);
+        return String.format(
+                "%d:%02d",
+                absSeconds / 60,
+                absSeconds % 60);
+    }
+
+    private void moveOnKeyPress (Block block) {
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                switch (keyEvent.getCode()) {
+                    case RIGHT -> board.moveBlockByOne(block, Direction.RIGHT);
+                    case LEFT -> board.moveBlockByOne(block, Direction.LEFT);
+                    case UP -> board.moveBlockByOne(block, Direction.UP);
+                    case DOWN -> board.moveBlockByOne(block, Direction.DOWN);
+                }
+                board.drawBoard(group);
+            }
+        });
+    }
+
+    public void start(Stage stage) {
+        initializeUIComponents(group);
+
+        Block block = Block.createBlock();
+        final int startX = Board.WIDTH / 2 - 1;
+        board.placeBlock(block, startX, 0);
+        board.drawBoard(group);
+        moveOnKeyPress(block);
+
+        stage.setScene(scene);
+        stage.setTitle("Numbered Tetris");
+        stage.show();
+
+        startGameLoop(block);
+    }
+
+    public static void main(String[] args) {
+        launch();
+    }
+
+
+
 }
