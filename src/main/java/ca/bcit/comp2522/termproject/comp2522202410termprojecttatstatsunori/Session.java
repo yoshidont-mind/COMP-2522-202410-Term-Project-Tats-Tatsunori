@@ -190,7 +190,7 @@ public class Session extends Application {
             currentBlock = Block.createBlock();
             board.placeBlock(currentBlock, Board.WIDTH / 2, 0);
         } else {
-            board.moveBlockByOne(currentBlock, Direction.DOWN);
+            moveOnKeyPress(currentBlock);
         }
 
         if (!board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.DOWN)
