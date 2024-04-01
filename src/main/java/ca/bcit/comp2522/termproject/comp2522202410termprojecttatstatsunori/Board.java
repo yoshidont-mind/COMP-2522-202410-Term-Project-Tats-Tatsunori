@@ -1,4 +1,4 @@
-package main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori;
+package ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -107,10 +107,10 @@ public class Board {
                 coordinatesToMoveBy[0] = 1;
                 break;
             case UP:
-                coordinatesToMoveBy[1] = 1;
+                coordinatesToMoveBy[1] = -1;
                 break;
             case DOWN:
-                coordinatesToMoveBy[1] = -1;
+                coordinatesToMoveBy[1] = 1;
                 break;
         }
         return coordinatesToMoveBy;
