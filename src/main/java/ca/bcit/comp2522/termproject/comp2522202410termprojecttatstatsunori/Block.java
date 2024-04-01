@@ -2,8 +2,14 @@ package main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstats
 
 import javafx.scene.paint.Color;
 import java.util.Random;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
+
 
 public class Block {
+
+    public static int SIZE = 25;
+    private final Rectangle rectangle = new Rectangle(SIZE - 1, SIZE - 1);
     public static final int MAX_VALUE = 9;
     private int value;
     private int xCoordinate;
@@ -11,12 +17,17 @@ public class Block {
     private Color color;
     private boolean isAlive;
     private boolean isMoving;
+    private Text text;
 
     public Block(int value) {
         if (0 <= value && value <= MAX_VALUE) {
             this.value = value;
         }
+        this.text = new Text(String.valueOf(value));
+        this.text.setX(this.rectangle.getX() + this.rectangle.getWidth() / 2 - this.text.getBoundsInLocal().getWidth() / 2);
+        this.text.setY(this.rectangle.getY() + this.rectangle.getHeight() / 2 + this.text.getBoundsInLocal().getHeight() / 4);
         assignColor(this.value);
+        fillColor();
         this.isAlive = true;
         this.isMoving = false;
     }
@@ -37,6 +48,14 @@ public class Block {
 
     public boolean getIsMoving() {
         return this.isMoving;
+    }
+
+    public Rectangle getRectangle() {
+        return this.rectangle;
+    }
+
+    public Text getText() {
+        return text;
     }
 
     public final void setValue(int value) {
@@ -100,9 +119,23 @@ public class Block {
         }
     }
 
+    public static Block createBlock() {
+        return new Block(new Random().nextInt(1, 10));
+    }
+
+    public final void fillColor() {
+        this.rectangle.setFill(this.color);
+    }
+
+    public void updateTextPosition() {
+        // テキストの位置を更新
+        this.text.setX(this.rectangle.getX() + this.rectangle.getWidth() / 2 - this.text.getBoundsInLocal().getWidth() / 2);
+        this.text.setY(this.rectangle.getY() + this.rectangle.getHeight() / 2 + this.text.getBoundsInLocal().getHeight() / 4);
+    }
+
     public static void main(String[] args) {
         for (int i = 0; i < 100; i++) {
-            Block block = new Block(new Random().nextInt(1, 10));
+            Block block = createBlock();
             int value = block.getValue();
             Color color = block.getColor();
             System.out.printf("Value %s: %s\n", value, color);
