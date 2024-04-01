@@ -9,7 +9,7 @@ import javafx.scene.text.Text;
 public class Block {
 
     public static int SIZE = 25;
-    private final Rectangle rectangle = new Rectangle(SIZE - 1, SIZE - 1);
+    public static final Rectangle rectangle = new Rectangle(SIZE - 1, SIZE - 1);
     public static final int MAX_VALUE = 9;
     private int value;
     private int xCoordinate;

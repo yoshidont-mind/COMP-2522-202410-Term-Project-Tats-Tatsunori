@@ -6,33 +6,23 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import static javafx.util.Duration.*;
 
 public class Session extends Application {
     /* instance variables */
 
-    public static int MOVE = 25;
-    public static final int SIZE = 50;
-    public static int MAX_X = Board.WIDTH * SIZE;
-    public static int MAX_Y = Board.HEIGHT * SIZE;
+    public static final int SIZE = 25;
+    public static final int MAX_X = Board.WIDTH * SIZE;
 
-    private Pane group;
-
-    private Scene scene;
-
-    private LocalDateTime startTime;
+    public static final int MAX_Y = Board.HEIGHT * SIZE;
+    private final LocalDateTime startTime;
     private int score;
 
     private Text scoreText;
@@ -43,8 +33,9 @@ public class Session extends Application {
     private int timeOnTop;
     private boolean isFinished;
     private double gameSpeed;
-    private Board board;
-
+    private final Board board;
+    private Scene scene;
+    private Pane group;
 
     /* constructors */
     /**

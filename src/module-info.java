@@ -4,5 +4,5 @@ module ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori {
 
 
     opens ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori to javafx.fxml;
-    exports ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori;
+    exports main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori;
 }
