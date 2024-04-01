@@ -4,11 +4,11 @@ import java.time.LocalDateTime;
 
 public class Session {
     /* instance variables */
-    private LocalDateTime startTime;
+    private final LocalDateTime startTime;
     private int score;
     private boolean isFinished;
     private double gameSpeed;
-    private Board board;
+    private final Board board;
 
     /* constructors */
     /**
