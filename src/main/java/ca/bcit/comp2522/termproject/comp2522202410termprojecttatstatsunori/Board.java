@@ -107,10 +107,10 @@ public class Board {
                 coordinatesToMoveBy[0] = 1;
                 break;
             case UP:
-                coordinatesToMoveBy[1] = 1;
+                coordinatesToMoveBy[1] = -1;
                 break;
             case DOWN:
-                coordinatesToMoveBy[1] = -1;
+                coordinatesToMoveBy[1] = 1;
                 break;
         }
         return coordinatesToMoveBy;
