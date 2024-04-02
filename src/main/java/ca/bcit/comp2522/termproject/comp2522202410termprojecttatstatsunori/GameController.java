@@ -46,9 +46,17 @@ public class GameController {
                     }
                     gameView.updateBoardDisplay(board);
                     lastUpdate = now;
+                    updateGame();
                 }
             }
         };
         gameLoop.start();
+    }
+
+    private void updateGame() {
+        if (session.isGameOver()) {
+            gameLoop.stop();
+            gameView.showGameOverMessage();
+        }
     }
 }

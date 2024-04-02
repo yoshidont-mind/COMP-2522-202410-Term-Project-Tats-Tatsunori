@@ -2,8 +2,11 @@ package main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstats
 
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -76,5 +79,12 @@ public class GameView {
             }
         }
     }
-
+    public void showGameOverMessage() {
+        Text gameOverText = new Text("GAME OVER");
+        gameOverText.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+        gameOverText.setFill(Color.RED);
+        gameOverText.setX(50);
+        gameOverText.setY(100);
+        group.getChildren().add(gameOverText);
+    }
 }

@@ -123,4 +123,12 @@ public class Session {
     public void nextBlock() {
         this.currentBlock = Block.createBlock();
     }
+
+    public boolean isGameOver() {
+        if (!board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.DOWN)
+                && !board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.UP)) {
+            setFinished(true);
+        }
+        return isFinished();
+    }
 }
