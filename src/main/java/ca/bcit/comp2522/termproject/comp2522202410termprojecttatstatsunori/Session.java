@@ -1,39 +1,17 @@
-package ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori;
-
-import javafx.animation.AnimationTimer;
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.shape.Line;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
+package main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Timer;
-import java.util.TimerTask;
 
-public class Session extends Application {
+
+public class Session {
     /* instance variables */
-
-    public static final int SIZE = 25;
-    public static final int MAX_X = Board.WIDTH * SIZE;
-
-    public static final int MAX_Y = Board.HEIGHT * SIZE;
     private final LocalDateTime startTime;
     private int score;
-
-    private Text scoreText;
-    private Text timeText;
     private boolean isFinished;
     private double gameSpeed;
-    private final Board board;
-    private Scene scene;
-    private Pane group;
-    private Timer fallTimer;
+    private Board board;
+    private Block currentBlock;
 
     /* constructors */
     /**
@@ -45,8 +23,7 @@ public class Session extends Application {
         this.isFinished = false;
         this.gameSpeed = 1.0;
         this.board = new Board();
-        this.group = new Pane();
-        this.scene = new Scene(group, MAX_X + 150, MAX_Y);
+        this.currentBlock = Block.createBlock();
     }
 
     /* getters */
@@ -96,6 +73,10 @@ public class Session extends Application {
         return board;
     }
 
+    public Block getCurrentBlock() {
+        return this.currentBlock;
+    }
+
     /* setters */
 
     /**
@@ -125,83 +106,13 @@ public class Session extends Application {
         this.gameSpeed = gameSpeed;
     }
 
+    public void setCurrentBlock(Block block) {
+        this.currentBlock = currentBlock;
+    }
+
     /* general purpose methods */
     public void updateDisplay() {
-        scoreText.setText("Score: " + score);
         Duration duration = Duration.between(startTime, LocalDateTime.now());
        // timeText.setText("Time: " + formatDuration(duration));
-    }
-
-    private void initializeUIComponents(Pane group) {
-        Line line = new Line(MAX_X, 0, MAX_X, MAX_Y);
-        this.scoreText = new Text("Score: ");
-        scoreText.setStyle("-fx-font: 20 arials;");
-        scoreText.setY(50);
-        scoreText.setX(MAX_X + 5);
-
-        timeText = new Text("Time: 0");
-        timeText.setStyle("-fx-font: 20 arial;");
-        timeText.setY(80);
-        timeText.setX(MAX_X + 5);
-
-        group.getChildren().addAll(scoreText, line, timeText);
-    }
-
-
-    private void moveOnKeyPress (Block block) {
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                switch (keyEvent.getCode()) {
-                    case RIGHT -> board.moveBlockByOne(block, Direction.RIGHT);
-                    case LEFT -> board.moveBlockByOne(block, Direction.LEFT);
-                    case UP -> board.moveBlockByOne(block, Direction.UP);
-                    case DOWN -> board.moveBlockByOne(block, Direction.DOWN);
-                }
-            }
-        });
-    }
-
-    public void start(Stage stage) {
-        group = new Pane();
-        Scene scene = new Scene(group, MAX_X + 150, MAX_Y);
-
-        Block currentBlock = Block.createBlock();
-        board.placeBlock(currentBlock, Board.WIDTH / 2, 0);
-        board.drawBoard(group);
-
-        stage.setScene(scene);
-        stage.setTitle("Numbered Tetris");
-        stage.show();
-
-        new AnimationTimer() {
-            public void handle(long currentNanoTime) {
-                if (!isFinished) {
-                    gameLoop(currentBlock);
-                } else {
-                    this.stop();
-                }
-            }
-        }.start();
-    }
-
-    private void gameLoop(Block currentBlock) {
-        if (!board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.DOWN)) {
-            currentBlock = Block.createBlock();
-            board.placeBlock(currentBlock, Board.WIDTH / 2, 0);
-        } else {
-            moveOnKeyPress(currentBlock);
-        }
-
-        if (!board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.DOWN)
-                && !board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.UP)) {
-            isFinished = true;
-        }
-
-        board.drawBoard(group);
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

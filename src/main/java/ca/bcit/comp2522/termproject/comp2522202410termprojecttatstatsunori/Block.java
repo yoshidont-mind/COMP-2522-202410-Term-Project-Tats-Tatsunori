@@ -1,4 +1,4 @@
-package ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori;
+package main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori;
 
 import javafx.scene.paint.Color;
 import java.util.Random;
@@ -9,7 +9,7 @@ import javafx.scene.text.Text;
 public class Block {
 
     public static int SIZE = 25;
-    public static final Rectangle rectangle = new Rectangle(SIZE - 1, SIZE - 1);
+    private final Rectangle rectangle;
     public static final int MAX_VALUE = 9;
     private int value;
     private int xCoordinate;
@@ -23,6 +23,7 @@ public class Block {
         if (0 <= value && value <= MAX_VALUE) {
             this.value = value;
         }
+        this.rectangle = new Rectangle(SIZE - 1, SIZE - 1);
         this.text = new Text(String.valueOf(value));
         this.text.setX(this.rectangle.getX() + this.rectangle.getWidth() / 2 - this.text.getBoundsInLocal().getWidth() / 2);
         this.text.setY(this.rectangle.getY() + this.rectangle.getHeight() / 2 + this.text.getBoundsInLocal().getHeight() / 4);
@@ -128,7 +129,6 @@ public class Block {
     }
 
     public void updateTextPosition() {
-        // テキストの位置を更新
         this.text.setX(this.rectangle.getX() + this.rectangle.getWidth() / 2 - this.text.getBoundsInLocal().getWidth() / 2);
         this.text.setY(this.rectangle.getY() + this.rectangle.getHeight() / 2 + this.text.getBoundsInLocal().getHeight() / 4);
     }
