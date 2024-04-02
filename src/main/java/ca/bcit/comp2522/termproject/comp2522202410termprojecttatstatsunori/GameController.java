@@ -39,7 +39,7 @@ public class GameController {
                 if (now - lastUpdate >= 1_000_000_000 / session.getGameSpeed()) {
                     Block currentBlock = session.getCurrentBlock();
                     Board board = session.getBoard();
-                    if (board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate() + 1, Direction.DOWN)) {
+                    if (board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.DOWN)) {
                         board.moveBlockByOne(currentBlock, Direction.DOWN);
                     } else {
                         session.nextBlock();
