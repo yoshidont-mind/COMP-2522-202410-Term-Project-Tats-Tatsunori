@@ -107,12 +107,20 @@ public class Session {
     }
 
     public void setCurrentBlock(Block block) {
-        this.currentBlock = currentBlock;
+        this.currentBlock = block;
     }
 
     /* general purpose methods */
     public void updateDisplay() {
         Duration duration = Duration.between(startTime, LocalDateTime.now());
        // timeText.setText("Time: " + formatDuration(duration));
+    }
+
+    public void addScore(int scoreToAdd) {
+        this.score += scoreToAdd;
+    }
+
+    public void nextBlock() {
+        this.currentBlock = Block.createBlock();
     }
 }

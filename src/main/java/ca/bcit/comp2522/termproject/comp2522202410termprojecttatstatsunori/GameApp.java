@@ -1,0 +1,21 @@
+package main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori;
+
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class GameApp extends Application {
+
+    @Override
+    public void start(Stage primaryStage) {
+        GameView gameView = new GameView();
+        Session session = new Session();
+        GameController gameController = new GameController(gameView, session);
+
+        gameController.startGameLoop();
+        gameView.show(primaryStage);
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}

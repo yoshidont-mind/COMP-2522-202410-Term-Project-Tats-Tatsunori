@@ -1,10 +1,5 @@
 package main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori;
 
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Board {
@@ -327,24 +322,4 @@ public class Board {
             return removeDeadBlocks();
         }
     }
-
-    public void drawBoard(Pane pane) {
-        pane.getChildren().clear();
-        for (int x = 0; x < WIDTH; x++) {
-            for (int y = 0; y < HEIGHT; y++) {
-                Block block = blocks[x][y];
-                Rectangle rectangle;
-                if (block != null) {
-                    rectangle = block.getRectangle();
-                    pane.getChildren().add(rectangle);
-                    pane.getChildren().add(block.getText());
-                } else {
-                    rectangle = new Rectangle(x * Block.SIZE, y * Block.SIZE, Block.SIZE, Block.SIZE);
-                    rectangle.setFill(Color.WHITE);
-                    pane.getChildren().add(rectangle);
-                }
-            }
-        }
-    }
-
 }

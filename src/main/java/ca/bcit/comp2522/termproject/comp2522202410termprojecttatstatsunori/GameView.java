@@ -3,6 +3,7 @@ package main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstats
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -43,11 +44,11 @@ public class GameView {
         return group;
     }
 
-    public void setScore(int score) {
+    public void setScoreText(int score) {
         scoreText.setText(String.format("Score: %s", score));
     }
 
-    public void setTime(String time) {
+    public void setTimeText(String time) {
         timeText.setText(String.format("Time: %s", time));
     }
 
@@ -55,6 +56,25 @@ public class GameView {
         stage.setScene(scene);
         stage.setTitle("Numbered Tetris");
         stage.show();
+    }
+
+    public void updateBoardDisplay(Board board) {
+        group.getChildren().clear();
+
+        for (int x = 0; x < Board.WIDTH; x++) {
+            for (int y = 0; y < Board.HEIGHT; y++) {
+                Block block = board.getBlocks()[x][y];
+                if (block != null && block.getIsAlive()) {
+                    Rectangle rectangle = block.getRectangle();
+                    rectangle.setX(x * Block.SIZE);
+                    rectangle.setY(y * Block.SIZE);
+                    Text text = block.getText();
+                    text.setX(rectangle.getX() + Block.SIZE / 2 - text.getBoundsInLocal().getWidth() / 2);
+                    text.setY(rectangle.getY() + Block.SIZE / 2 + text.getBoundsInLocal().getHeight() / 4);
+                    group.getChildren().addAll(rectangle, text);
+                }
+            }
+        }
     }
 
 }
