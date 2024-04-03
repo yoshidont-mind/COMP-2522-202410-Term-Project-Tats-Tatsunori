@@ -1,6 +1,8 @@
 package main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori;
 
 import javafx.scene.paint.Color;
+
+import java.util.Objects;
 import java.util.Random;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -133,12 +135,19 @@ public class Block {
         this.text.setY(this.rectangle.getY() + this.rectangle.getHeight() / 2 + this.text.getBoundsInLocal().getHeight() / 4);
     }
 
-    public static void main(String[] args) {
-        for (int i = 0; i < 100; i++) {
-            Block block = createBlock();
-            int value = block.getValue();
-            Color color = block.getColor();
-            System.out.printf("Value %s: %s\n", value, color);
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Block block)) return false;
+        return getValue() == block.getValue() && xCoordinate == block.xCoordinate && yCoordinate == block.yCoordinate
+                && isAlive == block.isAlive && isMoving == block.isMoving && Objects.equals(getRectangle(),
+                block.getRectangle()) && Objects.equals(getColor(), block.getColor()) && Objects.equals(getText(),
+                block.getText());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getRectangle(), getValue(), xCoordinate, yCoordinate, getColor(), isAlive, isMoving,
+                getText());
     }
 }

@@ -24,7 +24,6 @@ public class GameController {
         switch (event.getCode()) {
             case RIGHT -> board.moveBlockByOne(currentBlock, Direction.RIGHT);
             case LEFT -> board.moveBlockByOne(currentBlock, Direction.LEFT);
-            case UP -> board.moveBlockByOne(currentBlock, Direction.UP);
             case DOWN -> board.moveBlockByOne(currentBlock, Direction.DOWN);
         }
         gameView.updateBoardDisplay(board);
@@ -42,7 +41,8 @@ public class GameController {
                     if (board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.DOWN)) {
                         board.moveBlockByOne(currentBlock, Direction.DOWN);
                     } else {
-                        session.nextBlock();
+                        board.processEliminating(currentBlock.getXCoordinate(), currentBlock.getYCoordinate());
+                        session.createNextBlock();
                     }
                     gameView.updateBoardDisplay(board);
                     lastUpdate = now;

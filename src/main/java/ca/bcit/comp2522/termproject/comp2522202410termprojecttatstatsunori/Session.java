@@ -2,6 +2,7 @@ package main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstats
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Random;
 
 
 public class Session {
@@ -120,8 +121,10 @@ public class Session {
         this.score += scoreToAdd;
     }
 
-    public void nextBlock() {
+    public void createNextBlock() {
         this.currentBlock = Block.createBlock();
+        Random random = new Random();
+        board.placeBlock(currentBlock, random.nextInt(0, Board.WIDTH), 0);
     }
 
     public boolean isGameOver() {
