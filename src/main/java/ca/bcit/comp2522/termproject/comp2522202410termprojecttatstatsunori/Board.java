@@ -293,7 +293,7 @@ public class Board {
         for (int xCoordinate = 0; xCoordinate < WIDTH; xCoordinate++) {
             for (int yCoordinate = 0; yCoordinate < HEIGHT; yCoordinate++) {
                 Block currentBlock = this.blocks[xCoordinate][yCoordinate];
-                if (!currentBlock.getIsAlive()) {
+                if (currentBlock != null && !currentBlock.getIsAlive()) {
                     removeBlock(currentBlock);
                     removedBlocks++;
                 }
