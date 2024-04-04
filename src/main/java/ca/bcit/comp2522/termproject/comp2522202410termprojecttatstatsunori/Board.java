@@ -285,6 +285,13 @@ public class Board {
                 }
                 currentX++; // increment currentX to see the next block
             }
+
+            // when reach the right-most block, check if it becomes 10 once again
+            if (sum == OBJECTIVE_SUM) {
+                for (Block block: blocksUnderExamination) {
+                    block.setIsAlive(false);
+                }
+            }
         }
     }
 
