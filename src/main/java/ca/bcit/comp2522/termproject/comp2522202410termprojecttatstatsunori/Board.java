@@ -171,7 +171,9 @@ public class Board {
         int movedBlocks = 0;
         for (int xCoordinate = 0; xCoordinate < WIDTH; xCoordinate++) {
             for (int yCoordinate = 0; yCoordinate < HEIGHT; yCoordinate++) {
-                movedBlocks += moveBlockByOne(this.blocks[xCoordinate][yCoordinate], direction);
+                if (this.blocks[xCoordinate][yCoordinate] != null) {
+                    movedBlocks += moveBlockByOne(this.blocks[xCoordinate][yCoordinate], direction);
+                }
             }
         }
         return movedBlocks;
@@ -286,7 +288,6 @@ public class Board {
         }
     }
 
-
     /* Removes dead blocks. */
     private int removeDeadBlocks() {
         int removedBlocks = 0;
@@ -319,7 +320,16 @@ public class Board {
         } else {
             this.seeRow(yCoordinate);
             this.seeDownwards(xCoordinate, yCoordinate);
-            return removeDeadBlocks();
+            int numOfRemovedBlock =  removeDeadBlocks();
+
+            // move all blocks downwards repeatedly until no blocks move anymore
+            int numOfMovedBlocks = 0;
+            do {
+                numOfMovedBlocks = this.moveBlocks(Direction.DOWN);
+            }
+            while (numOfMovedBlocks > 0);
+
+            return numOfRemovedBlock;
         }
     }
 }
