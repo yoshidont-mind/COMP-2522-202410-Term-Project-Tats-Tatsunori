@@ -55,6 +55,22 @@ public class GameView {
         timeText.setFill(Color.BLACK);
 
         group.getChildren().addAll(scoreText, line, timeText);
+        drawGrid();
+    }
+
+    private void drawGrid() {
+        for (int x = 0; x <= Board.WIDTH; x++) {
+            Line verticalLine = new Line(x * Block.SIZE, 0, x * Block.SIZE, MAX_Y);
+            verticalLine.setStroke(Color.GRAY);
+            permanentUIComponents.add(verticalLine);
+            group.getChildren().add(verticalLine);
+        }
+        for (int y = 0; y <= Board.HEIGHT; y++) {
+            Line horizontalLine = new Line(0, y * Block.SIZE, MAX_X, y * Block.SIZE);
+            horizontalLine.setStroke(Color.GRAY);
+            permanentUIComponents.add(horizontalLine);
+            group.getChildren().add(horizontalLine);
+        }
     }
 
     public Scene getScene() {

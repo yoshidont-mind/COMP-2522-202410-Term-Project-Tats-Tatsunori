@@ -90,31 +90,31 @@ public class Block {
     public final void assignColor(int value) {
         switch (value) {
             case 1:
-                setColor(Color.BLUE);
+                setColor(Color.LIGHTBLUE);
                 break;
             case 2:
-                setColor(Color.RED);
+                setColor(Color.LIGHTCORAL);
                 break;
             case 3:
-                setColor(Color.YELLOW);
+                setColor(Color.LIGHTYELLOW);
                 break;
             case 4:
-                setColor(Color.GREEN);
+                setColor(Color.LIGHTPINK);
                 break;
             case 5:
-                setColor(Color.ORANGE);
+                setColor(Color.LIGHTGRAY);
                 break;
             case 6:
-                setColor(Color.PURPLE);
+                setColor(Color.LIGHTGOLDENRODYELLOW);
                 break;
             case 7:
-                setColor(Color.PINK);
+                setColor(Color.LIGHTGREEN);
                 break;
             case 8:
-                setColor(Color.GRAY);
+                setColor(Color.LIGHTSALMON);
                 break;
             case 9:
-                setColor(Color.BROWN);
+                setColor(Color.LIGHTSEAGREEN);
                 break;
             default:
                 setColor(Color.WHITE); // colour for value 0
