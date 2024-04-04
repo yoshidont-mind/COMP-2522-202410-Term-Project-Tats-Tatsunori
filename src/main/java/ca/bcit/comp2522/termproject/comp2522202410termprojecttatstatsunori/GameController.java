@@ -41,7 +41,10 @@ public class GameController {
                     if (board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.DOWN)) {
                         board.moveBlockByOne(currentBlock, Direction.DOWN);
                     } else {
-                        board.processEliminating(currentBlock.getXCoordinate(), currentBlock.getYCoordinate());
+                        int scoreToAdd = board.processEliminating(currentBlock.getXCoordinate()
+                                , currentBlock.getYCoordinate());
+                        session.addScore(scoreToAdd);
+                        gameView.setScoreText(session.getScore());
                         session.createNextBlock();
                     }
                     gameView.updateBoardDisplay(board);

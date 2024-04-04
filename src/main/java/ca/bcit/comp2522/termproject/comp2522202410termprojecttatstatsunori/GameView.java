@@ -15,6 +15,7 @@ public class GameView {
     private Text scoreText;
     private Text timeText;
     private Scene scene;
+    private Line line;
     public static final int MAX_X = Board.WIDTH * Block.SIZE;
     public static final int MAX_Y = Board.HEIGHT * Block.SIZE;
 
@@ -25,16 +26,18 @@ public class GameView {
     }
 
     private final void initializeUIComponents() {
-        Line line = new Line(MAX_X, 0, MAX_X, MAX_Y);
+        line = new Line(MAX_X, 0, MAX_X, MAX_Y);
         this.scoreText = new Text("Score: ");
         scoreText.setStyle("-fx-font: 20 arial;");
         scoreText.setY(50);
         scoreText.setX(MAX_X + 5);
+        scoreText.setFill(Color.BLACK);
 
         this.timeText = new Text("Time: 0");
         timeText.setStyle("-fx-font: 20 arial;");
         timeText.setY(80);
         timeText.setX(MAX_X + 5);
+        timeText.setFill(Color.BLACK);
 
         group.getChildren().addAll(scoreText, line, timeText);
     }
@@ -49,6 +52,10 @@ public class GameView {
 
     public void setScoreText(int score) {
         scoreText.setText(String.format("Score: %s", score));
+        scoreText.setStyle("-fx-font: 20 arial;");
+        scoreText.setY(50);
+        scoreText.setX(MAX_X + 5);
+        scoreText.setFill(Color.BLACK);
     }
 
     public void setTimeText(String time) {
@@ -63,6 +70,7 @@ public class GameView {
 
     public void updateBoardDisplay(Board board) {
         group.getChildren().clear();
+        group.getChildren().addAll(scoreText);
 
         for (int x = 0; x < Board.WIDTH; x++) {
             for (int y = 0; y < Board.HEIGHT; y++) {
@@ -78,7 +86,13 @@ public class GameView {
                 }
             }
         }
+
     }
+
+    public void updateText(Board board) {
+
+    }
+
     public void showGameOverMessage() {
         Text gameOverText = new Text("GAME OVER");
         gameOverText.setFont(Font.font("Arial", FontWeight.BOLD, 24));
