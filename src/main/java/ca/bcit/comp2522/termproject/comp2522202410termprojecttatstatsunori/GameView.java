@@ -1,5 +1,6 @@
 package main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori;
 
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -10,8 +11,13 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameView {
+    private List<Node> permanentUIComponents;
     private Pane group;
+    private Pane whiteBackGround;
     private Text scoreText;
     private Text timeText;
     private Scene scene;
@@ -21,22 +27,31 @@ public class GameView {
 
     public GameView() {
         this.group = new Pane();
+        this.whiteBackGround = new Pane();
+        this.permanentUIComponents = new ArrayList<>();
+        group.setStyle("-fx-background-color: black");
+        whiteBackGround.setStyle("-fx-background-color: white");
+        whiteBackGround.setPrefSize(150, MAX_Y);
+        whiteBackGround.setTranslateX(MAX_X);
+        whiteBackGround.setTranslateY(0);
+        group.getChildren().add(whiteBackGround);
+        permanentUIComponents.add(whiteBackGround);
         this.scene = new Scene(group, MAX_X + 150, MAX_Y);
         initializeUIComponents();
     }
 
     private final void initializeUIComponents() {
         line = new Line(MAX_X, 0, MAX_X, MAX_Y);
-        this.scoreText = new Text("Score: ");
+        this.scoreText = new Text("Score: 0");
         scoreText.setStyle("-fx-font: 20 arial;");
         scoreText.setY(50);
-        scoreText.setX(MAX_X + 5);
+        scoreText.setX(MAX_X + 10);
         scoreText.setFill(Color.BLACK);
 
         this.timeText = new Text("Time: 0");
         timeText.setStyle("-fx-font: 20 arial;");
         timeText.setY(80);
-        timeText.setX(MAX_X + 5);
+        timeText.setX(MAX_X + 10);
         timeText.setFill(Color.BLACK);
 
         group.getChildren().addAll(scoreText, line, timeText);
@@ -54,7 +69,7 @@ public class GameView {
         scoreText.setText(String.format("Score: %s", score));
         scoreText.setStyle("-fx-font: 20 arial;");
         scoreText.setY(50);
-        scoreText.setX(MAX_X + 5);
+        scoreText.setX(MAX_X + 10);
         scoreText.setFill(Color.BLACK);
     }
 
@@ -69,7 +84,7 @@ public class GameView {
     }
 
     public void updateBoardDisplay(Board board) {
-        group.getChildren().clear();
+        group.getChildren().retainAll(permanentUIComponents);
         group.getChildren().addAll(scoreText);
 
         for (int x = 0; x < Board.WIDTH; x++) {
@@ -86,10 +101,6 @@ public class GameView {
                 }
             }
         }
-
-    }
-
-    public void updateText(Board board) {
 
     }
 
