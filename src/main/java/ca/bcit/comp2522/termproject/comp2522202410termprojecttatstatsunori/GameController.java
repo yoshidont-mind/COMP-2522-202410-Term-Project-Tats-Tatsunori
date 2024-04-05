@@ -4,6 +4,7 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyEvent;
 
 public class GameController {
+    public static double SECONDS_TO_DOUBLE_SPEED = 300.0;
     private final GameView gameView;
     private final Session session;
     private AnimationTimer gameLoop;
@@ -45,11 +46,18 @@ public class GameController {
                                 , currentBlock.getYCoordinate());
                         session.addScore(scoreToAdd);
                         gameView.setScoreText(session.getScore());
+                        gameView.setSpeedText(session.getGameSpeed());
                         session.createNextBlock();
                     }
                     gameView.updateBoardDisplay(board);
                     lastUpdate = now;
                     updateGame();
+
+                    // update gameSpeed (linear increase)
+                    double incrementPerSecond = (2.0 - 1.0) / SECONDS_TO_DOUBLE_SPEED;
+                    double secondsPerIteration = 1.0 / session.getGameSpeed();
+                    double newGameSpeed = session.getGameSpeed() + incrementPerSecond * secondsPerIteration;
+                    session.setGameSpeed(newGameSpeed);
                 }
             }
         };

@@ -16,16 +16,15 @@ import java.util.List;
 
 public class GameView {
     public static int TEXT_POSITION_X = 20;
-    public static int TEXT_SIZE = 25;
-    public static int SCORE_TEXT_POSITION_Y = 100;
-    public static int GAME_SPEED_TEXT_POSITION_Y = 150;
-    public static int TEXT_FIELD_WIDTH = 150;
+    public static int TEXT_SIZE = 20;
     private List<Node> permanentUIComponents;
     private Pane group;
     private Pane whiteBackGround;
     private Text scoreText;
-    private Text gameSpeedText;
+    private Text timeText;
+    private Text speedText;
     private Scene scene;
+    private Line line;
     public static final int MAX_X = Board.WIDTH * Block.SIZE;
     public static final int MAX_Y = Board.HEIGHT * Block.SIZE;
 
@@ -35,29 +34,40 @@ public class GameView {
         this.permanentUIComponents = new ArrayList<>();
         group.setStyle("-fx-background-color: black");
         whiteBackGround.setStyle("-fx-background-color: white");
-        whiteBackGround.setPrefSize(TEXT_FIELD_WIDTH, MAX_Y);
+        whiteBackGround.setPrefSize(150, MAX_Y);
         whiteBackGround.setTranslateX(MAX_X);
         whiteBackGround.setTranslateY(0);
         group.getChildren().add(whiteBackGround);
         permanentUIComponents.add(whiteBackGround);
-        this.scene = new Scene(group, MAX_X + TEXT_FIELD_WIDTH, MAX_Y);
+        this.scene = new Scene(group, MAX_X + 150, MAX_Y);
         initializeUIComponents();
     }
 
     private final void initializeUIComponents() {
+        line = new Line(MAX_X, 0, MAX_X, MAX_Y);
+
+        // set score text
         this.scoreText = new Text("Score: 0");
         scoreText.setFont(Font.font("arial", TEXT_SIZE));
-        scoreText.setY(SCORE_TEXT_POSITION_Y);
+        scoreText.setY(50);
         scoreText.setX(MAX_X + TEXT_POSITION_X);
         scoreText.setFill(Color.BLACK);
 
-        this.gameSpeedText = new Text("Game speed: 1.0");
-        gameSpeedText.setFont(Font.font("arial", TEXT_SIZE));
-        gameSpeedText.setY(GAME_SPEED_TEXT_POSITION_Y);
-        gameSpeedText.setX(MAX_X + TEXT_POSITION_X);
-        gameSpeedText.setFill(Color.BLACK);
+        // set time text
+        this.timeText = new Text("Time: 0");
+        timeText.setFont(Font.font("arial", TEXT_SIZE));
+        timeText.setY(80);
+        timeText.setX(MAX_X + TEXT_POSITION_X);
+        timeText.setFill(Color.BLACK);
 
-        group.getChildren().addAll(scoreText, gameSpeedText);
+        // set speed text
+        this.speedText = new Text("Speed: x1.00");
+        speedText.setFont(Font.font("arial", TEXT_SIZE));
+        speedText.setY(110);
+        speedText.setX(MAX_X + TEXT_POSITION_X);
+        speedText.setFill(Color.BLACK);
+
+        group.getChildren().addAll(scoreText, line, timeText, speedText);
         drawGrid();
     }
 
@@ -86,18 +96,14 @@ public class GameView {
 
     public void setScoreText(int score) {
         scoreText.setText(String.format("Score: %s", score));
-        scoreText.setFont(Font.font("arial", TEXT_SIZE));
-        scoreText.setY(SCORE_TEXT_POSITION_Y);
-        scoreText.setX(MAX_X + TEXT_POSITION_X);
-        scoreText.setFill(Color.BLACK);
     }
 
-    public void setTimeText(double gameSpeed) {
-        gameSpeedText.setText(String.format("Game speed: %s", gameSpeed));
-        gameSpeedText.setFont(Font.font("arial", TEXT_SIZE));
-        gameSpeedText.setY(GAME_SPEED_TEXT_POSITION_Y);
-        gameSpeedText.setX(MAX_X + TEXT_POSITION_X);
-        gameSpeedText.setFill(Color.BLACK);
+    public void setTimeText(String time) {
+        timeText.setText(String.format("Time: %s", time));
+    }
+
+    public void setSpeedText(double speed) {
+        speedText.setText(String.format("Speed: x%.2f", speed));
     }
 
     public void show(Stage stage) {
@@ -108,7 +114,8 @@ public class GameView {
 
     public void updateBoardDisplay(Board board) {
         group.getChildren().retainAll(permanentUIComponents);
-        group.getChildren().addAll(scoreText, gameSpeedText);
+        group.getChildren().addAll(scoreText);
+        group.getChildren().addAll(speedText);
 
         for (int x = 0; x < Board.WIDTH; x++) {
             for (int y = 0; y < Board.HEIGHT; y++) {
@@ -124,6 +131,7 @@ public class GameView {
                 }
             }
         }
+
     }
 
     public void showGameOverMessage() {
