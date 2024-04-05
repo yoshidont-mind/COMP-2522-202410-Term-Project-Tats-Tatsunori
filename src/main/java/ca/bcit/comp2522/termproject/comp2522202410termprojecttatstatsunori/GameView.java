@@ -61,7 +61,7 @@ public class GameView {
         timeText.setFill(Color.BLACK);
 
         // set speed text
-        this.speedText = new Text("Speed: x1.0");
+        this.speedText = new Text("Speed: x1.00");
         speedText.setFont(Font.font("arial", TEXT_SIZE));
         speedText.setY(110);
         speedText.setX(MAX_X + TEXT_POSITION_X);
@@ -103,7 +103,7 @@ public class GameView {
     }
 
     public void setSpeedText(double speed) {
-        speedText.setText(String.format("Speed: %f", speed));
+        speedText.setText(String.format("Speed: x%.2f", speed));
     }
 
     public void show(Stage stage) {
