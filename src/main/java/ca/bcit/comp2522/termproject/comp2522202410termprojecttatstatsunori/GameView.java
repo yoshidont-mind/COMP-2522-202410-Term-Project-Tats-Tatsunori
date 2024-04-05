@@ -16,12 +16,13 @@ import java.util.List;
 
 public class GameView {
     public static int TEXT_POSITION_X = 20;
-    public static int TEXT_SIZE = 25;
+    public static int TEXT_SIZE = 20;
     private List<Node> permanentUIComponents;
     private Pane group;
     private Pane whiteBackGround;
     private Text scoreText;
     private Text timeText;
+    private Text speedText;
     private Scene scene;
     private Line line;
     public static final int MAX_X = Board.WIDTH * Block.SIZE;
@@ -44,19 +45,29 @@ public class GameView {
 
     private final void initializeUIComponents() {
         line = new Line(MAX_X, 0, MAX_X, MAX_Y);
+
+        // set score text
         this.scoreText = new Text("Score: 0");
         scoreText.setFont(Font.font("arial", TEXT_SIZE));
         scoreText.setY(50);
         scoreText.setX(MAX_X + TEXT_POSITION_X);
         scoreText.setFill(Color.BLACK);
 
+        // set time text
         this.timeText = new Text("Time: 0");
         timeText.setFont(Font.font("arial", TEXT_SIZE));
         timeText.setY(80);
         timeText.setX(MAX_X + TEXT_POSITION_X);
         timeText.setFill(Color.BLACK);
 
-        group.getChildren().addAll(scoreText, line, timeText);
+        // set speed text
+        this.speedText = new Text("Speed: x1.0");
+        speedText.setFont(Font.font("arial", TEXT_SIZE));
+        speedText.setY(110);
+        speedText.setX(MAX_X + TEXT_POSITION_X);
+        speedText.setFill(Color.BLACK);
+
+        group.getChildren().addAll(scoreText, line, timeText, speedText);
         drawGrid();
     }
 
@@ -85,14 +96,14 @@ public class GameView {
 
     public void setScoreText(int score) {
         scoreText.setText(String.format("Score: %s", score));
-        scoreText.setFont(Font.font("arial", TEXT_SIZE));
-        scoreText.setY(50);
-        scoreText.setX(MAX_X + TEXT_POSITION_X);
-        scoreText.setFill(Color.BLACK);
     }
 
     public void setTimeText(String time) {
         timeText.setText(String.format("Time: %s", time));
+    }
+
+    public void setSpeedText(double speed) {
+        speedText.setText(String.format("Speed: %f", speed));
     }
 
     public void show(Stage stage) {
@@ -104,6 +115,7 @@ public class GameView {
     public void updateBoardDisplay(Board board) {
         group.getChildren().retainAll(permanentUIComponents);
         group.getChildren().addAll(scoreText);
+        group.getChildren().addAll(speedText);
 
         for (int x = 0; x < Board.WIDTH; x++) {
             for (int y = 0; y < Board.HEIGHT; y++) {

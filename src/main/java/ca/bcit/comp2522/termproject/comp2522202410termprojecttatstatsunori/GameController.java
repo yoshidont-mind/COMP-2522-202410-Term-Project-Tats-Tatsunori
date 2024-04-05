@@ -45,11 +45,16 @@ public class GameController {
                                 , currentBlock.getYCoordinate());
                         session.addScore(scoreToAdd);
                         gameView.setScoreText(session.getScore());
+                        gameView.setSpeedText(session.getGameSpeed());
                         session.createNextBlock();
                     }
                     gameView.updateBoardDisplay(board);
                     lastUpdate = now;
                     updateGame();
+
+                    // update gameSpeed
+                    double newGameSpeed = (double) (lastUpdate / 1_000_000_000) / 1_000_000 + 1.0;
+                    session.setGameSpeed(newGameSpeed);
                 }
             }
         };
