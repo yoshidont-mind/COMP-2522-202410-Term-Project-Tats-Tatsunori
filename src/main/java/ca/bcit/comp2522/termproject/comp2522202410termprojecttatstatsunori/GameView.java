@@ -17,6 +17,7 @@ import java.util.List;
 public class GameView {
     public static int TEXT_POSITION_X = 20;
     public static int TEXT_SIZE = 20;
+    public static int TEXT_FIELD_WIDTH = 150;
     private List<Node> permanentUIComponents;
     private Pane group;
     private Pane whiteBackGround;
@@ -34,12 +35,12 @@ public class GameView {
         this.permanentUIComponents = new ArrayList<>();
         group.setStyle("-fx-background-color: black");
         whiteBackGround.setStyle("-fx-background-color: white");
-        whiteBackGround.setPrefSize(150, MAX_Y);
+        whiteBackGround.setPrefSize(TEXT_FIELD_WIDTH, MAX_Y);
         whiteBackGround.setTranslateX(MAX_X);
         whiteBackGround.setTranslateY(0);
         group.getChildren().add(whiteBackGround);
         permanentUIComponents.add(whiteBackGround);
-        this.scene = new Scene(group, MAX_X + 150, MAX_Y);
+        this.scene = new Scene(group, MAX_X + TEXT_FIELD_WIDTH, MAX_Y);
         initializeUIComponents();
     }
 
