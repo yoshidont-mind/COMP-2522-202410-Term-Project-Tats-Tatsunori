@@ -5,12 +5,15 @@ import javafx.scene.paint.Color;
 import java.util.Objects;
 import java.util.Random;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 
 public class Block {
 
-    public static int SIZE = 50;
+    public static int SIZE = 55;
+    public static int TEXT_SIZE = 20;
     private final Rectangle rectangle;
     public static final int MAX_VALUE = 9;
     private int value;
@@ -27,6 +30,7 @@ public class Block {
         }
         this.rectangle = new Rectangle(SIZE - 1, SIZE - 1);
         this.text = new Text(String.valueOf(value));
+        text.setFont(Font.font("Arial", FontWeight.BOLD, TEXT_SIZE));
         this.text.setX(this.rectangle.getX() + this.rectangle.getWidth() / 2 - this.text.getBoundsInLocal().getWidth() / 2);
         this.text.setY(this.rectangle.getY() + this.rectangle.getHeight() / 2 + this.text.getBoundsInLocal().getHeight() / 4);
         assignColor(this.value);
@@ -105,7 +109,7 @@ public class Block {
                 setColor(Color.LIGHTGRAY);
                 break;
             case 6:
-                setColor(Color.LIGHTGOLDENRODYELLOW);
+                setColor(Color.LIGHTSKYBLUE);
                 break;
             case 7:
                 setColor(Color.LIGHTGREEN);

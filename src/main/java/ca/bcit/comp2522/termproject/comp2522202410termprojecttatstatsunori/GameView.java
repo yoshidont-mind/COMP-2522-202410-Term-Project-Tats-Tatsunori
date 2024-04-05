@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameView {
+    public static int TEXT_POSITION_X = 20;
+    public static int TEXT_SIZE = 25;
     private List<Node> permanentUIComponents;
     private Pane group;
     private Pane whiteBackGround;
@@ -43,15 +45,15 @@ public class GameView {
     private final void initializeUIComponents() {
         line = new Line(MAX_X, 0, MAX_X, MAX_Y);
         this.scoreText = new Text("Score: 0");
-        scoreText.setStyle("-fx-font: 20 arial;");
+        scoreText.setFont(Font.font("arial", TEXT_SIZE));
         scoreText.setY(50);
-        scoreText.setX(MAX_X + 10);
+        scoreText.setX(MAX_X + TEXT_POSITION_X);
         scoreText.setFill(Color.BLACK);
 
         this.timeText = new Text("Time: 0");
-        timeText.setStyle("-fx-font: 20 arial;");
+        timeText.setFont(Font.font("arial", TEXT_SIZE));
         timeText.setY(80);
-        timeText.setX(MAX_X + 10);
+        timeText.setX(MAX_X + TEXT_POSITION_X);
         timeText.setFill(Color.BLACK);
 
         group.getChildren().addAll(scoreText, line, timeText);
@@ -83,9 +85,9 @@ public class GameView {
 
     public void setScoreText(int score) {
         scoreText.setText(String.format("Score: %s", score));
-        scoreText.setStyle("-fx-font: 20 arial;");
+        scoreText.setFont(Font.font("arial", TEXT_SIZE));
         scoreText.setY(50);
-        scoreText.setX(MAX_X + 10);
+        scoreText.setX(MAX_X + TEXT_POSITION_X);
         scoreText.setFill(Color.BLACK);
     }
 
@@ -122,7 +124,7 @@ public class GameView {
 
     public void showGameOverMessage() {
         Text gameOverText = new Text("GAME OVER");
-        gameOverText.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+        gameOverText.setFont(Font.font("Arial", FontWeight.BOLD, TEXT_SIZE));
         gameOverText.setFill(Color.RED);
         gameOverText.setX(50);
         gameOverText.setY(100);
