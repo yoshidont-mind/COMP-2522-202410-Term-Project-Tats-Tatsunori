@@ -114,4 +114,30 @@ class BoardTest {
         Assertions.assertEquals(0, board.moveBlocks(Direction.LEFT));
         Assertions.assertEquals(0, board.moveBlocks(Direction.RIGHT));
     }
+
+    @Test
+    void testProcessEliminatingWithinBounds() {
+        Block block1 = new Block(5);
+        Block block2 = new Block(3);
+        Block block3 = new Block(2);
+        board.placeBlock(block1, 0, 0);
+        board.placeBlock(block2, 0, 1);
+        board.placeBlock(block3, 0, 2);
+
+        Assertions.assertEquals(3, board.processEliminating(0, 0));
+        Assertions.assertNull(board.getBlocks()[0][0]);
+        Assertions.assertNull(board.getBlocks()[0][1]);
+        Assertions.assertNull(board.getBlocks()[0][2]);
+    }
+
+    @Test
+    void testProcessEliminatingOutOfBounds() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> board.processEliminating(-1, 0));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> board.processEliminating(0, 11));
+    }
+
+    @Test
+    void testProcessEliminatingWithNoBlock() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> board.processEliminating(0, 0));
+    }
 }
