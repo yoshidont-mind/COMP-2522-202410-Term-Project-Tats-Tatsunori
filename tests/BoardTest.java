@@ -28,4 +28,18 @@ class BoardTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> board.placeBlock(block, -1, 0));
         Assertions.assertThrows(IllegalArgumentException.class, () -> board.placeBlock(block, 0, 11));
     }
+
+    @Test
+    void testRemoveExistingBlock() {
+        Block block = new Block(5);
+        board.placeBlock(block, 2, 3);
+        Assertions.assertEquals(1, board.removeBlock(block));
+        Assertions.assertNull(board.getBlocks()[2][3]);
+    }
+
+    @Test
+    void testRemoveNonExistentBlock() {
+        Block block = new Block(5);
+        Assertions.assertEquals(0, board.removeBlock(block));
+    }
 }
