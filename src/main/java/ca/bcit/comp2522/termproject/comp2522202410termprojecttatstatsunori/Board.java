@@ -169,10 +169,16 @@ public class Board {
      */
     public int moveBlocks(final Direction direction) {
         int movedBlocks = 0;
-        for (int xCoordinate = 0; xCoordinate < WIDTH; xCoordinate++) {
-            for (int yCoordinate = 0; yCoordinate < HEIGHT; yCoordinate++) {
+        ArrayList<Block> alreadyMoved = new ArrayList<>();
+
+        for (int yCoordinate = 0; yCoordinate < HEIGHT; yCoordinate++) {
+            for (int xCoordinate = 0; xCoordinate < WIDTH; xCoordinate++) {
                 if (this.blocks[xCoordinate][yCoordinate] != null) {
-                    movedBlocks += moveBlockByOne(this.blocks[xCoordinate][yCoordinate], direction);
+                    Block block = this.blocks[xCoordinate][yCoordinate];
+                    if (!alreadyMoved.contains(block)) {
+                        movedBlocks += moveBlockByOne(block, direction);
+                        alreadyMoved.add(block);
+                    }
                 }
             }
         }
