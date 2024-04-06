@@ -86,4 +86,32 @@ class BoardTest {
         Assertions.assertEquals(0, board.moveBlockByOne(block, Direction.DOWN));
         Assertions.assertSame(block, board.getBlocks()[4][10]);
     }
+
+    @Test
+    void testMoveBlocksDownward() {
+        Block block1 = new Block(5);
+        Block block2 = new Block(3);
+        Block block3 = new Block(2);
+        board.placeBlock(block1, 0, 0);
+        board.placeBlock(block2, 0, 1);
+        board.placeBlock(block3, 0, 2);
+
+        Assertions.assertEquals(3, board.moveBlocks(Direction.DOWN));
+        Assertions.assertSame(block1, board.getBlocks()[0][0]);
+        Assertions.assertSame(block2, board.getBlocks()[0][1]);
+        Assertions.assertSame(block3, board.getBlocks()[0][2]);
+    }
+
+    @Test
+    void testMoveBlocksHorizontally() {
+        Block block1 = new Block(5);
+        Block block2 = new Block(3);
+        Block block3 = new Block(2);
+        board.placeBlock(block1, 0, 0);
+        board.placeBlock(block2, 0, 1);
+        board.placeBlock(block3, 0, 2);
+
+        Assertions.assertEquals(0, board.moveBlocks(Direction.LEFT));
+        Assertions.assertEquals(0, board.moveBlocks(Direction.RIGHT));
+    }
 }
