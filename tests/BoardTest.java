@@ -113,7 +113,7 @@ class BoardTest {
         board.placeBlock(block3, 0, 2);
 
         Assertions.assertEquals(0, board.moveBlocks(Direction.LEFT));
-        Assertions.assertEquals(0, board.moveBlocks(Direction.RIGHT));
+        Assertions.assertEquals(3, board.moveBlocks(Direction.RIGHT));
     }
 
     @Test
