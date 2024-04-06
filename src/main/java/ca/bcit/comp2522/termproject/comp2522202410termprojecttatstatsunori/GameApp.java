@@ -11,8 +11,8 @@ public class GameApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        BackgroundMusic bgm = new BackgroundMusic(bgmPath);
-        bgm.play();
+        Sound bgm = new Sound(bgmPath);
+        bgm.playBgm();
         GameView gameView = new GameView();
         Session session = new Session();
         GameController gameController = new GameController(gameView, session);

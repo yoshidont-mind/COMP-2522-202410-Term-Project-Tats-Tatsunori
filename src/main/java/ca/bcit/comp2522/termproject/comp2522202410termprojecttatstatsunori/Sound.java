@@ -1,14 +1,14 @@
 package main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori;
 
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.Media;
 
 import java.io.File;
 
-public class BackgroundMusic {
-    private MediaPlayer mediaPlayer;
+public class Sound {
+    private final MediaPlayer mediaPlayer;
 
-    public BackgroundMusic(String musicFilePath) {
+    Sound (String musicFilePath) {
         Media media = new Media(new File(musicFilePath).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
     }
@@ -17,12 +17,17 @@ public class BackgroundMusic {
         return mediaPlayer;
     }
 
-    public void play() {
+    public void playBgm() {
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.play();
     }
 
+    public void play() {
+        mediaPlayer.play();
+    }
+
     public void stop() {
-        mediaPlayer.stop();
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.play();
     }
 }
