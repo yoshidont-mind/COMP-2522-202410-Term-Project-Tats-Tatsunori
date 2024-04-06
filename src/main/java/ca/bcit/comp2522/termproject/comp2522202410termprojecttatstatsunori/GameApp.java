@@ -2,6 +2,8 @@ package main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstats
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class GameApp extends Application {
 
