@@ -42,4 +42,30 @@ class BoardTest {
         Block block = new Block(5);
         Assertions.assertEquals(0, board.removeBlock(block));
     }
+
+    @Test
+    void testValidateMoveWithinBounds() {
+        Block block = new Block(5);
+        board.placeBlock(block, 2, 3);
+        Assertions.assertTrue(board.validateMove(2, 3, Direction.LEFT));
+        Assertions.assertTrue(board.validateMove(2, 3, Direction.RIGHT));
+        Assertions.assertTrue(board.validateMove(2, 3, Direction.UP));
+        Assertions.assertTrue(board.validateMove(2, 3, Direction.DOWN));
+    }
+
+    @Test
+    void testValidateMoveOutOfBounds() {
+        Assertions.assertFalse(board.validateMove(0, 3, Direction.LEFT));
+        Assertions.assertFalse(board.validateMove(4, 3, Direction.RIGHT));
+        Assertions.assertFalse(board.validateMove(2, 0, Direction.UP));
+        Assertions.assertFalse(board.validateMove(2, 10, Direction.DOWN));
+    }
+
+    @Test
+    void testValidateMoveWithInvalidCoordinates() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> board.validateMove(-1, 3, Direction.LEFT));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> board.validateMove(5, 3, Direction.RIGHT));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> board.validateMove(2, -1, Direction.UP));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> board.validateMove(2, 11, Direction.DOWN));
+    }
 }
