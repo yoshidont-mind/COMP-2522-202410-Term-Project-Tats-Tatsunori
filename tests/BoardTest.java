@@ -68,4 +68,22 @@ class BoardTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> board.validateMove(2, -1, Direction.UP));
         Assertions.assertThrows(IllegalArgumentException.class, () -> board.validateMove(2, 11, Direction.DOWN));
     }
+
+    @Test
+    void testMoveBlockByOneWithinBounds() {
+        Block block = new Block(5);
+        board.placeBlock(block, 2, 3);
+        Assertions.assertEquals(1, board.moveBlockByOne(block, Direction.LEFT));
+        Assertions.assertSame(block, board.getBlocks()[1][3]);
+        Assertions.assertEquals(1, block.getXCoordinate());
+        Assertions.assertEquals(3, block.getYCoordinate());
+    }
+
+    @Test
+    void testMoveBlockByOneOutOfBounds() {
+        Block block = new Block(5);
+        board.placeBlock(block, 4, 10);
+        Assertions.assertEquals(0, board.moveBlockByOne(block, Direction.DOWN));
+        Assertions.assertSame(block, board.getBlocks()[4][10]);
+    }
 }
