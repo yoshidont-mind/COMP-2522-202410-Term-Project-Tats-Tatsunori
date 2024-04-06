@@ -7,7 +7,7 @@ public class Board {
     /**
      * The height of boards
      */
-    public static final int HEIGHT = 11;
+    public static final int HEIGHT = 10;
 
     /**
      * The width of boards
@@ -205,7 +205,7 @@ public class Board {
 //                sum += currentBlock.getValue();
 //                checkedBlocks.add(currentBlock);
 //
-//                // if sum is 0, kill all checked blocks and return total number of killed blocks
+//                // if sum is the objective number, kill all checked blocks and return total number of killed blocks
 //                if (sum == OBJECTIVE_SUM) {
 //                    int killedBlocks = 0;
 //                    for (Block block: checkedBlocks) {
@@ -274,7 +274,7 @@ public class Board {
                 // if the next block is null, that means reaching end of a block chunk
                 if (this.blocks[currentX][yCoordinate] == null) {
                     // if sum of the block chunk is OBJECTIVE_SUM, kill blocks in the chunk
-                    if (sum == OBJECTIVE_SUM) {
+                    if (sum % OBJECTIVE_SUM == 0) {
                         for (Block block: blocksUnderExamination) {
                             block.setIsAlive(false);
                         }
@@ -293,7 +293,7 @@ public class Board {
             }
 
             // when reach the right-most block, check if it becomes 10 once again
-            if (sum == OBJECTIVE_SUM) {
+            if (sum % OBJECTIVE_SUM == 0) {
                 for (Block block: blocksUnderExamination) {
                     block.setIsAlive(false);
                 }
@@ -331,8 +331,15 @@ public class Board {
         } else if (this.blocks[xCoordinate][yCoordinate] == null) {
             throw new IllegalArgumentException("There must exist a block at given coordinates");
         } else {
+            // Option A: horizontal blocks get removed only when sum of the chunk get the objective number
             this.seeRow(yCoordinate);
             this.seeDownwards(xCoordinate, yCoordinate);
+
+//            // Option B: horizontal blocks get removed in the same logic as downward
+//            this.seeOneDirection(xCoordinate, yCoordinate, Direction.LEFT);
+//            this.seeOneDirection(xCoordinate, yCoordinate, Direction.RIGHT);
+//            this.seeOneDirection(xCoordinate, yCoordinate, Direction.DOWN);
+
             int numOfRemovedBlock =  removeDeadBlocks();
 
             // move all blocks downwards repeatedly until no blocks move anymore
