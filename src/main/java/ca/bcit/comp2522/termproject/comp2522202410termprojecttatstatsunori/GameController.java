@@ -1,9 +1,12 @@
 package main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori;
 
 import javafx.animation.AnimationTimer;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+
+import java.security.Key;
 
 public class GameController {
     public static double SECONDS_TO_DOUBLE_SPEED = 300.0;
@@ -32,6 +35,15 @@ public class GameController {
             case RIGHT -> board.moveBlockByOne(currentBlock, Direction.RIGHT);
             case LEFT -> board.moveBlockByOne(currentBlock, Direction.LEFT);
             case DOWN -> board.moveBlockByOne(currentBlock, Direction.DOWN);
+            case UP -> {
+                while (board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.DOWN)) {
+                    board.moveBlockByOne(currentBlock, Direction.DOWN);
+                }
+            }
+        }
+        if (!board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.DOWN)
+        && (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.DOWN)) {
+            currentBlock.setIsMoving(false);
         }
         moveBlockSound.play();
         gameView.updateBoardDisplay(board);
@@ -43,32 +55,35 @@ public class GameController {
 
             @Override
             public void handle(long now) {
+                Block currentBlock = session.getCurrentBlock();
+                Board board = session.getBoard();
                 if (now - lastUpdate >= 1_000_000_000 / session.getGameSpeed()) {
-                    Block currentBlock = session.getCurrentBlock();
-                    Board board = session.getBoard();
                     if (board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.DOWN)) {
                         board.moveBlockByOne(currentBlock, Direction.DOWN);
                     } else {
-                        new Sound(landBlockSoundPath).play();
-                        int scoreToAdd = board.processEliminating(currentBlock.getXCoordinate()
-                                , currentBlock.getYCoordinate());
-                        if (scoreToAdd > 1) {
-                            new Sound(clearBlockSoundPath).play();
-                        }
-                        session.addScore(scoreToAdd);
-                        gameView.setScoreText(session.getScore());
-                        gameView.setSpeedText(session.getGameSpeed());
-                        session.createNextBlock();
+                        currentBlock.setIsMoving(false);
                     }
-                    gameView.updateBoardDisplay(board);
-                    lastUpdate = now;
-                    updateGame();
 
                     // update gameSpeed (linear increase)
                     double incrementPerSecond = (2.0 - 1.0) / SECONDS_TO_DOUBLE_SPEED;
                     double secondsPerIteration = 1.0 / session.getGameSpeed();
                     double newGameSpeed = session.getGameSpeed() + incrementPerSecond * secondsPerIteration;
                     session.setGameSpeed(newGameSpeed);
+                    gameView.setSpeedText(session.getGameSpeed());
+                    gameView.updateBoardDisplay(board);
+                    lastUpdate = now;
+                    updateGame();
+                }
+                if (!currentBlock.getIsMoving()){
+                    new Sound(landBlockSoundPath).play();
+                    int scoreToAdd = board.processEliminating(currentBlock.getXCoordinate()
+                            , currentBlock.getYCoordinate());
+                    if (scoreToAdd > 1) {
+                        new Sound(clearBlockSoundPath).play();
+                    }
+                    session.addScore(scoreToAdd);
+                    gameView.setScoreText(session.getScore());
+                    session.createNextBlock();
                 }
             }
         };

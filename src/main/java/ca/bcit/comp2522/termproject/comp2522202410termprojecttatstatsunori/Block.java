@@ -36,7 +36,7 @@ public class Block {
         assignColor(this.value);
         fillColor();
         this.isAlive = true;
-        this.isMoving = false;
+        this.isMoving = true;
     }
 
     public int getValue() {
