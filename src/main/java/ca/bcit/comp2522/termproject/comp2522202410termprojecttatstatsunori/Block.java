@@ -93,12 +93,12 @@ public class Block {
         return text;
     }
 
-//    /** Sets the value of the block. */
-//    public final void setValue(int value) {
-//        if (0 <= value && value <= MAX_VALUE) {
-//            this.value = value;
-//        }
-//    }
+    /** Sets the value of the block. */
+    public final void setValue(int value) {
+        if (0 <= value && value <= MAX_VALUE) {
+            this.value = value;
+        }
+    }
 
     /** Sets the X coordinate of the block. */
     public final void setXCoordinate(final int xCoordinate) {
@@ -179,11 +179,11 @@ public class Block {
         this.rectangle.setFill(this.color);
     }
 
-//    /** Updates the position of the text within the block based on the block's size and position. */
-//    public void updateTextPosition() {
-//        this.text.setX(this.rectangle.getX() + this.rectangle.getWidth() / 2 - this.text.getBoundsInLocal().getWidth() / 2);
-//        this.text.setY(this.rectangle.getY() + this.rectangle.getHeight() / 2 + this.text.getBoundsInLocal().getHeight() / 4);
-//    }
+    /** Updates the position of the text within the block based on the block's size and position. */
+    public void updateTextPosition() {
+        this.text.setX(this.rectangle.getX() + this.rectangle.getWidth() / 2 - this.text.getBoundsInLocal().getWidth() / 2);
+        this.text.setY(this.rectangle.getY() + this.rectangle.getHeight() / 2 + this.text.getBoundsInLocal().getHeight() / 4);
+    }
 
     /**
      * Compares this block to another object to determine equality.
