@@ -7,16 +7,45 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 import java.security.Key;
-
+/**
+ * Handles the game logic and user interactions in the game, manages the game loop, processes key presses,
+ * and updates the game state.
+ *
+ * @author Tatsunori Marumo, Tatsuya Yoshida
+ *
+ * @version 2024
+ */
 public class GameController {
+
+    /**
+     * The duration in seconds after which the game speed doubles.
+     */
     public static double SECONDS_TO_DOUBLE_SPEED = 300.0;
+
+    /**
+     * Path to the sound file played when a block is cleared.
+     */
     public static String clearBlockSoundPath = "sound/clearBlockSound.mp3";
+
+    /**
+     * Path to the sound file played when a block lands.
+     */
     public static String landBlockSoundPath = "sound/landBlockSound.mp3";
+
+    /**
+     * Path to the sound file played when a block is moved.
+     */
     public static String moveBlockSoundPath = "sound/moveBlockSound.mp3";
+
     private final GameView gameView;
     private final Session session;
     private AnimationTimer gameLoop;
 
+    /**
+     * Constructs a GameController with the specified GameView and Session.
+     * @param gameView the view of the game
+     * @param session the current game session
+     */
     public GameController(GameView gameView, Session session) {
         this.gameView = gameView;
         this.session = session;
@@ -49,6 +78,9 @@ public class GameController {
         gameView.updateBoardDisplay(board);
     }
 
+    /**
+     * Starts the main game loop, updating game state and rendering at a rate determined by the game speed.
+     */
     public void startGameLoop() {
         gameLoop = new AnimationTimer() {
             private long lastUpdate = 0;

@@ -14,6 +14,14 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Manages the graphics of the game.
+ * It handles the rendering of game components like the grid, score, time, and speed,
+ * as well as updating the display during gameplay.
+ *
+ * @author Tatsunori Marumo, Tatsuya Yoshida
+ * @version 2024
+ */
 public class GameView {
     public static int TEXT_POSITION_X = 20;
     public static int TEXT_SIZE = 20;
@@ -29,6 +37,9 @@ public class GameView {
     public static final int MAX_X = Board.WIDTH * Block.SIZE;
     public static final int MAX_Y = Board.HEIGHT * Block.SIZE;
 
+    /**
+     * Constructs a GameView object and initializes the UI components.
+     */
     public GameView() {
         this.group = new Pane();
         this.whiteBackGround = new Pane();
@@ -87,32 +98,60 @@ public class GameView {
         }
     }
 
+    /**
+     * Gets the Scene object of this game view.
+     * @return the scene of this game view
+     */
     public Scene getScene() {
         return scene;
     }
 
+    /**
+     * Gets the Group object that contains all UI elements of this game view.
+     * @return the group containing UI elements
+     */
     public Pane getGroup() {
         return group;
     }
 
+    /**
+     * Sets the score text in the game view.
+     * @param score the score to display
+     */
     public void setScoreText(int score) {
         scoreText.setText(String.format("Score: %s", score));
     }
 
+    /**
+     * Sets the time text in the game view.
+     * @param time the time to display
+     */
     public void setTimeText(String time) {
         timeText.setText(String.format("Time: %s", time));
     }
 
+    /**
+     * Sets the speed text in the game view.
+     * @param speed the speed factor to display
+     */
     public void setSpeedText(double speed) {
         speedText.setText(String.format("Speed: x%.2f", speed));
     }
 
+    /**
+     * Initializes the stage and shows the game view.
+     * @param stage the primary stage of the application
+     */
     public void show(Stage stage) {
         stage.setScene(scene);
         stage.setTitle("Numbered Tetris");
         stage.show();
     }
 
+    /**
+     * Updates the display of the board within the game view.
+     * @param board the current game board to display
+     */
     public void updateBoardDisplay(Board board) {
         group.getChildren().retainAll(permanentUIComponents);
         group.getChildren().addAll(scoreText);
@@ -135,6 +174,9 @@ public class GameView {
 
     }
 
+    /**
+     * Displays the game over message.
+     */
     public void showGameOverMessage() {
         Text gameOverText = new Text("GAME OVER");
         gameOverText.setFont(Font.font("Arial", FontWeight.BOLD, TEXT_SIZE));
