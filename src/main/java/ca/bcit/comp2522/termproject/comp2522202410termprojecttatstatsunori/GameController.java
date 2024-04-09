@@ -57,6 +57,9 @@ public class GameController {
     }
 
     private void handleKeyPress (KeyEvent event) {
+        if (session.getIsPaused() || session.isGameOver()) {
+            return;
+        }
         Block currentBlock = session.getCurrentBlock();
         Board board = session.getBoard();
         Sound moveBlockSound = new Sound(moveBlockSoundPath);
