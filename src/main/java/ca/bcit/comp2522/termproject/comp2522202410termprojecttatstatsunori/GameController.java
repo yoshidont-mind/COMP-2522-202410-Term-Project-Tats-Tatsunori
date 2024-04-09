@@ -69,6 +69,7 @@ public class GameController {
                     board.moveBlockByOne(currentBlock, Direction.DOWN);
                 }
             }
+            case SPACE -> session.setPaused();
         }
         if (!board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.DOWN)
         && (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.DOWN)) {
@@ -83,6 +84,7 @@ public class GameController {
      */
     public void startGameLoop() {
         gameLoop = new AnimationTimer() {
+
             private long lastUpdate = 0;
 
             @Override

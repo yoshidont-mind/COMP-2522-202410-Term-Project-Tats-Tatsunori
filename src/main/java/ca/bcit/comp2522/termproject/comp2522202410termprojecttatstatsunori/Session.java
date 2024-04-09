@@ -13,6 +13,7 @@ public class Session {
     private double gameSpeed;
     private Board board;
     private Block currentBlock;
+    private boolean isPaused;
 
     /* constructors */
     /**
@@ -25,6 +26,7 @@ public class Session {
         this.gameSpeed = 1.0;
         this.board = new Board();
         this.currentBlock = Block.createBlock();
+        this.isPaused = false;
     }
 
     /* getters */
@@ -52,7 +54,7 @@ public class Session {
      *
      * @return a boolean
      */
-    public boolean isFinished() {
+    public boolean getFinished() {
         return isFinished;
     }
 
@@ -76,6 +78,10 @@ public class Session {
 
     public Block getCurrentBlock() {
         return this.currentBlock;
+    }
+
+    public boolean getIsPaused() {
+        return isPaused;
     }
 
     /* setters */
@@ -117,6 +123,10 @@ public class Session {
        // timeText.setText("Time: " + formatDuration(duration));
     }
 
+    public void setPaused() {
+        this.isPaused = !isPaused;
+    }
+
     public void addScore(int scoreToAdd) {
         this.score += scoreToAdd;
     }
@@ -132,6 +142,6 @@ public class Session {
                 && !board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.UP)) {
             setFinished(true);
         }
-        return isFinished();
+        return getFinished();
     }
 }
