@@ -39,28 +39,92 @@ public class BlockTest {
     }
 
     @Test
-    void testBlockValue() {
+    void testBlockValueOne() {
         assertEquals(1, blockOne.getValue());
+    }
+
+    @Test
+    void testBlockValueTwo() {
         assertEquals(2, blockTwo.getValue());
+    }
+
+    @Test
+    void testBlockValueThree() {
         assertEquals(3, blockThree.getValue());
+    }
+
+    @Test
+    void testBlockValueFour() {
         assertEquals(4, blockFour.getValue());
+    }
+
+    @Test
+    void testBlockValueFive() {
         assertEquals(5, blockFive.getValue());
+    }
+
+    @Test
+    void testBlockValueSix() {
         assertEquals(6, blockSix.getValue());
+    }
+
+    @Test
+    void testBlockValueSeven() {
         assertEquals(7, blockSeven.getValue());
+    }
+
+    @Test
+    void testBlockValueEight() {
         assertEquals(8, blockEight.getValue());
+    }
+
+    @Test
+    void testBlockValueNine() {
         assertEquals(9, blockNine.getValue());
     }
 
     @Test
-    void testBlockColor() {
+    void testBlockColorValueOne() {
         assertEquals(Color.LIGHTBLUE, blockOne.getColor());
+    }
+
+    @Test
+    void testBlockColorValueTwo() {
         assertEquals(Color.LIGHTCORAL, blockTwo.getColor());
+    }
+
+    @Test
+    void testBlockColorValueThree() {
         assertEquals(Color.LIGHTYELLOW, blockThree.getColor());
+    }
+
+    @Test
+    void testBlockColorValueFour() {
         assertEquals(Color.LIGHTPINK, blockFour.getColor());
+    }
+
+    @Test
+    void testBlockColorValueFive() {
         assertEquals(Color.LIGHTGRAY, blockFive.getColor());
+    }
+
+    @Test
+    void testBlockColorValueSix() {
         assertEquals(Color.LIGHTSKYBLUE, blockSix.getColor());
+    }
+
+    @Test
+    void testBlockColorValueSeven() {
         assertEquals(Color.LIGHTGREEN, blockSeven.getColor());
+    }
+
+    @Test
+    void testBlockColorValueEight() {
         assertEquals(Color.LIGHTSALMON, blockEight.getColor());
+    }
+
+    @Test
+    void testBlockColorValueNine() {
         assertEquals(Color.LIGHTSEAGREEN, blockNine.getColor());
     }
 
