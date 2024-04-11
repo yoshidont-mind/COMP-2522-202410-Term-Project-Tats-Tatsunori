@@ -12,7 +12,6 @@ target/
 *.iws
 *.iml
 *.ipr
-Player/player
 
 ### Eclipse ###
 .apt_generated
@@ -38,3 +37,6 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Save File ###
+.Player/player

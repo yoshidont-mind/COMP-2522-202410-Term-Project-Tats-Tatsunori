@@ -132,36 +132,16 @@ public class Block {
      */
     public final void assignColor(int value) {
         switch (value) {
-            case 1:
-                setColor(Color.LIGHTBLUE);
-                break;
-            case 2:
-                setColor(Color.LIGHTCORAL);
-                break;
-            case 3:
-                setColor(Color.LIGHTYELLOW);
-                break;
-            case 4:
-                setColor(Color.LIGHTPINK);
-                break;
-            case 5:
-                setColor(Color.LIGHTGRAY);
-                break;
-            case 6:
-                setColor(Color.LIGHTSKYBLUE);
-                break;
-            case 7:
-                setColor(Color.LIGHTGREEN);
-                break;
-            case 8:
-                setColor(Color.LIGHTSALMON);
-                break;
-            case 9:
-                setColor(Color.LIGHTSEAGREEN);
-                break;
-            default:
-                setColor(Color.WHITE); // colour for value 0
-                break;
+            case 1 -> setColor(Color.LIGHTBLUE);
+            case 2 -> setColor(Color.LIGHTCORAL);
+            case 3 -> setColor(Color.LIGHTYELLOW);
+            case 4 -> setColor(Color.LIGHTPINK);
+            case 5 -> setColor(Color.LIGHTGRAY);
+            case 6 -> setColor(Color.LIGHTSKYBLUE);
+            case 7 -> setColor(Color.LIGHTGREEN);
+            case 8 -> setColor(Color.LIGHTSALMON);
+            case 9 -> setColor(Color.LIGHTSEAGREEN);
+            default -> setColor(Color.WHITE); // colour for value 0
         }
     }
 

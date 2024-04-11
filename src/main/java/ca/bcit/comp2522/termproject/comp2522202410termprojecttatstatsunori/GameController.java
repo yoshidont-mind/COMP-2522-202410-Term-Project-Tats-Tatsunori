@@ -62,7 +62,7 @@ public class GameController {
     }
 
     private void handleKeyPress (KeyEvent event) {
-        if (session.getIsPaused() || session.isGameOver()) {
+        if (session.isGameOver()) {
             return;
         }
         Block currentBlock = session.getCurrentBlock();
@@ -118,14 +118,16 @@ public class GameController {
                     lastUpdate = now;
                     updateGame();
                 }
-                if (!currentBlock.getIsMoving()){
+
+                // update game when the bottom of current block hits another block or floor
+                if (!currentBlock.getIsMoving()) {
                     new Sound(landBlockSoundPath).play();
                     int scoreToAdd = board.processEliminating(currentBlock.getXCoordinate()
                             , currentBlock.getYCoordinate());
                     if (scoreToAdd > 1) {
                         new Sound(clearBlockSoundPath).play();
                     }
-                    session.addScore(scoreToAdd);
+                    session.addScore(scoreToAdd); // calculate score
                     gameView.setScoreText(session.getScore());
                     if (player.getBestScore() < session.getScore()) {
                         player.setBestScore(session.getScore());
