@@ -113,6 +113,7 @@ public class GameController {
                     session.setGameSpeed(newGameSpeed);
                     gameView.setSpeedText(session.getGameSpeed());
                     gameView.updateBoardDisplay(board);
+                    gameView.drawNextBlock(session.getNextBlock());
                     lastUpdate = now;
                     updateGame();
                 }
@@ -129,6 +130,9 @@ public class GameController {
                         player.setBestScore(session.getScore());
                     }
                     session.createNextBlock();
+                    gameView.updateBoardDisplay(board);
+                    gameView.drawNextBlock(session.getNextBlock());
+                    updateGame();
                 }
             }
         };

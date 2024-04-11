@@ -82,6 +82,10 @@ public class Session {
         return this.currentBlock;
     }
 
+    public Block getNextBlock() {
+        return this.nextBlock;
+    }
+
     public boolean getIsPaused() {
         return isPaused;
     }
@@ -115,8 +119,12 @@ public class Session {
         this.gameSpeed = gameSpeed;
     }
 
-    public void setCurrentBlock(Block block) {
-        this.currentBlock = block;
+    public void setCurrentBlock() {
+        this.currentBlock = nextBlock;
+    }
+
+    public void setNextBlock(Block block) {
+        this.nextBlock = block;
     }
 
     /* general purpose methods */
@@ -134,8 +142,8 @@ public class Session {
     }
 
     public void createNextBlock() {
-        this.currentBlock = nextBlock;
-        this.nextBlock = Block.createBlock();
+        setCurrentBlock();
+        setNextBlock(Block.createBlock());
         Random random = new Random();
         board.placeBlock(currentBlock, random.nextInt(0, Board.WIDTH), 0);
     }

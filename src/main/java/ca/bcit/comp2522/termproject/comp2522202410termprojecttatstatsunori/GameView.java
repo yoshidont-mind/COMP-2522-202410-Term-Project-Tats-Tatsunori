@@ -33,6 +33,7 @@ public class GameView {
     private List<Node> permanentUIComponents;
     private Pane group;
     private Pane whiteBackGround;
+    private Text nextBlockText;
     private Text scoreText;
     private Text bestScoreText;
     private Text timeText;
@@ -63,6 +64,13 @@ public class GameView {
     private final void initializeUIComponents() {
         line = new Line(MAX_X, 0, MAX_X, MAX_Y);
 
+        // set next block text
+        this.nextBlockText = new Text("Next Block");
+        nextBlockText.setFont(Font.font("arial", TEXT_SIZE));
+        nextBlockText.setY(NEXT_BLOCK_Y);
+        nextBlockText.setX(MAX_X + TEXT_POSITION_X);
+        nextBlockText.setFill(Color.BLACK);
+
         // set best score text
         this.bestScoreText = new Text("Best Score: ");
         bestScoreText.setFont(Font.font("arial", TEXT_SIZE));
@@ -91,7 +99,7 @@ public class GameView {
         speedText.setX(MAX_X + TEXT_POSITION_X);
         speedText.setFill(Color.BLACK);
 
-        group.getChildren().addAll(bestScoreText, scoreText, line, timeText, speedText);
+        group.getChildren().addAll(nextBlockText, bestScoreText, scoreText, line, timeText, speedText);
         drawGrid();
     }
 
@@ -164,13 +172,23 @@ public class GameView {
         stage.show();
     }
 
+    public void drawNextBlock(Block nextBlock) {
+        Rectangle rectangle = nextBlock.getRectangle();
+        rectangle.setX(MAX_X + 50);
+        rectangle.setY(NEXT_BLOCK_Y + 20);
+        Text text = nextBlock.getText();
+        text.setX(rectangle.getX() + Block.SIZE / 2 - text.getBoundsInLocal().getWidth() / 2);
+        text.setY(rectangle.getY() + Block.SIZE / 2 + text.getBoundsInLocal().getHeight() / 4);
+        group.getChildren().addAll(rectangle, text);
+    }
+
     /**
      * Updates the display of the board within the game view.
      * @param board the current game board to display
      */
     public void updateBoardDisplay(Board board) {
         group.getChildren().retainAll(permanentUIComponents);
-        group.getChildren().addAll(bestScoreText, scoreText, speedText);
+        group.getChildren().addAll(nextBlockText, bestScoreText, scoreText, speedText);
 
         for (int x = 0; x < Board.WIDTH; x++) {
             for (int y = 0; y < Board.HEIGHT; y++) {
