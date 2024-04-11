@@ -85,6 +85,7 @@ public class GameController {
         }
         moveBlockSound.play();
         gameView.updateBoardDisplay(board);
+        gameView.drawNextBlock(session.getNextBlock());
     }
 
     /**

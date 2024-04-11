@@ -211,10 +211,10 @@ public class GameView {
      */
     public void showGameOverMessage() {
         Text gameOverText = new Text("GAME OVER");
-        gameOverText.setFont(Font.font("Arial", FontWeight.BOLD, TEXT_SIZE));
+        gameOverText.setFont(Font.font("Arial", FontWeight.BOLD, TEXT_SIZE * 2));
         gameOverText.setFill(Color.RED);
-        gameOverText.setX(50);
-        gameOverText.setY(100);
+        gameOverText.setX(100);
+        gameOverText.setY(150);
         group.getChildren().add(gameOverText);
     }
 }
