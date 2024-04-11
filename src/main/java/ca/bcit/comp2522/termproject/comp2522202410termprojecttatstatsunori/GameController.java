@@ -39,6 +39,8 @@ public class GameController {
 
     private final GameView gameView;
     private final Session session;
+    private final Player player;
+    private final int bestScoreBeforeGame;
     private AnimationTimer gameLoop;
 
     /**
@@ -46,10 +48,13 @@ public class GameController {
      * @param gameView the view of the game
      * @param session the current game session
      */
-    public GameController(GameView gameView, Session session) {
+    public GameController(GameView gameView, Session session, Player player) {
         this.gameView = gameView;
         this.session = session;
+        this.player = player;
+        this.bestScoreBeforeGame = player.getBestScore();
         initializeControls();
+        gameView.setBestScoreText(player.getBestScore());
     }
 
     private final void initializeControls() {
@@ -120,6 +125,9 @@ public class GameController {
                     }
                     session.addScore(scoreToAdd);
                     gameView.setScoreText(session.getScore());
+                    if (player.getBestScore() < session.getScore()) {
+                        player.setBestScore(session.getScore());
+                    }
                     session.createNextBlock();
                 }
             }
@@ -131,6 +139,9 @@ public class GameController {
         if (session.isGameOver()) {
             gameLoop.stop();
             gameView.showGameOverMessage();
+            if (player.getBestScore() > bestScoreBeforeGame) {
+                FileCreator.serializeObject(GameApp.filePath, player);
+            }
         }
     }
 }

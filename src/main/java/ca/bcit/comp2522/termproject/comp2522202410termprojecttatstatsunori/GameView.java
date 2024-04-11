@@ -23,13 +23,18 @@ import java.util.List;
  * @version 2024
  */
 public class GameView {
-    public static int TEXT_POSITION_X = 20;
+    public static int TEXT_POSITION_X = 30;
     public static int TEXT_SIZE = 20;
-    public static int TEXT_FIELD_WIDTH = 150;
+    public static int TEXT_FIELD_WIDTH = 200;
+    public static int NEXT_BLOCK_Y = 50;
+    public static int BEST_SCORE_TEXT_Y = 200;
+    public static int SCORE_TEXT_Y = 250;
+    public static int GAME_SPEED_Y = 300;
     private List<Node> permanentUIComponents;
     private Pane group;
     private Pane whiteBackGround;
     private Text scoreText;
+    private Text bestScoreText;
     private Text timeText;
     private Text speedText;
     private Scene scene;
@@ -58,10 +63,17 @@ public class GameView {
     private final void initializeUIComponents() {
         line = new Line(MAX_X, 0, MAX_X, MAX_Y);
 
+        // set best score text
+        this.bestScoreText = new Text("Best Score: ");
+        bestScoreText.setFont(Font.font("arial", TEXT_SIZE));
+        bestScoreText.setY(BEST_SCORE_TEXT_Y);
+        bestScoreText.setX(MAX_X + TEXT_POSITION_X);
+        bestScoreText.setFill(Color.BLACK);
+
         // set score text
         this.scoreText = new Text("Score: 0");
         scoreText.setFont(Font.font("arial", TEXT_SIZE));
-        scoreText.setY(50);
+        scoreText.setY(SCORE_TEXT_Y);
         scoreText.setX(MAX_X + TEXT_POSITION_X);
         scoreText.setFill(Color.BLACK);
 
@@ -75,11 +87,11 @@ public class GameView {
         // set speed text
         this.speedText = new Text("Speed: x1.00");
         speedText.setFont(Font.font("arial", TEXT_SIZE));
-        speedText.setY(110);
+        speedText.setY(GAME_SPEED_Y);
         speedText.setX(MAX_X + TEXT_POSITION_X);
         speedText.setFill(Color.BLACK);
 
-        group.getChildren().addAll(scoreText, line, timeText, speedText);
+        group.getChildren().addAll(bestScoreText, scoreText, line, timeText, speedText);
         drawGrid();
     }
 
@@ -112,6 +124,10 @@ public class GameView {
      */
     public Pane getGroup() {
         return group;
+    }
+
+    public void setBestScoreText(int bestScore) {
+        bestScoreText.setText(String.format("Best Score: %s", bestScore));
     }
 
     /**
@@ -154,8 +170,7 @@ public class GameView {
      */
     public void updateBoardDisplay(Board board) {
         group.getChildren().retainAll(permanentUIComponents);
-        group.getChildren().addAll(scoreText);
-        group.getChildren().addAll(speedText);
+        group.getChildren().addAll(bestScoreText, scoreText, speedText);
 
         for (int x = 0; x < Board.WIDTH; x++) {
             for (int y = 0; y < Board.HEIGHT; y++) {

@@ -8,6 +8,8 @@ import javafx.scene.media.MediaPlayer;
 public class GameApp extends Application {
 
     public static String bgmPath = "sound/tetris-theme-korobeiniki-rearranged-arr-for-music-box-184978.mp3";
+    public static String directoryName = "Player";
+    public static String filePath = "Player/player";
 
     @Override
     public void start(Stage primaryStage) {
@@ -15,7 +17,11 @@ public class GameApp extends Application {
         bgm.playBgm();
         GameView gameView = new GameView();
         Session session = new Session();
-        GameController gameController = new GameController(gameView, session);
+        FileCreator.createDirectory(directoryName);
+        Player bestPlayer = FileCreator.deserializeObject(filePath);
+        int bestScore = bestPlayer != null ? bestPlayer.getBestScore() : 0;
+        Player player = new Player(bestScore);
+        GameController gameController = new GameController(gameView, session, player);
         gameController.startGameLoop();
         gameView.show(primaryStage);
         primaryStage.setOnCloseRequest(event -> bgm.stop());

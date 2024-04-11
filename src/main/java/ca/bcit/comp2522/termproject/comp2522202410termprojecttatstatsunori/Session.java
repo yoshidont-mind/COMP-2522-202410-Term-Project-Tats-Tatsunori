@@ -13,6 +13,7 @@ public class Session {
     private double gameSpeed;
     private Board board;
     private Block currentBlock;
+    private Block nextBlock;
     private boolean isPaused;
 
     /* constructors */
@@ -26,6 +27,7 @@ public class Session {
         this.gameSpeed = 1.0;
         this.board = new Board();
         this.currentBlock = Block.createBlock();
+        this.nextBlock = Block.createBlock();
         this.isPaused = false;
     }
 
@@ -132,7 +134,8 @@ public class Session {
     }
 
     public void createNextBlock() {
-        this.currentBlock = Block.createBlock();
+        this.currentBlock = nextBlock;
+        this.nextBlock = Block.createBlock();
         Random random = new Random();
         board.placeBlock(currentBlock, random.nextInt(0, Board.WIDTH), 0);
     }
