@@ -128,11 +128,6 @@ public class Session {
     }
 
     /* general purpose methods */
-    public void updateDisplay() {
-        Duration duration = Duration.between(startTime, LocalDateTime.now());
-       // timeText.setText("Time: " + formatDuration(duration));
-    }
-
     public void setPaused() {
         this.isPaused = !isPaused;
     }

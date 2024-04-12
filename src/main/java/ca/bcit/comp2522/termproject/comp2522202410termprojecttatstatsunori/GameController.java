@@ -3,10 +3,7 @@ package main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstats
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 
-import java.security.Key;
 /**
  * Handles the game logic and user interactions in the game, manages the game loop, processes key presses,
  * and updates the game state.

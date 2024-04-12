@@ -36,7 +36,6 @@ public class GameView {
     private Text nextBlockText;
     private Text scoreText;
     private Text bestScoreText;
-    private Text timeText;
     private Text speedText;
     private Scene scene;
     private Line line;
@@ -85,13 +84,6 @@ public class GameView {
         scoreText.setX(MAX_X + TEXT_POSITION_X);
         scoreText.setFill(Color.BLACK);
 
-        // set time text
-        this.timeText = new Text("Time: 0");
-        timeText.setFont(Font.font("arial", TEXT_SIZE));
-        timeText.setY(80);
-        timeText.setX(MAX_X + TEXT_POSITION_X);
-        timeText.setFill(Color.BLACK);
-
         // set speed text
         this.speedText = new Text("Speed: x1.00");
         speedText.setFont(Font.font("arial", TEXT_SIZE));
@@ -99,7 +91,7 @@ public class GameView {
         speedText.setX(MAX_X + TEXT_POSITION_X);
         speedText.setFill(Color.BLACK);
 
-        group.getChildren().addAll(nextBlockText, bestScoreText, scoreText, line, timeText, speedText);
+        group.getChildren().addAll(nextBlockText, bestScoreText, scoreText, line, speedText);
         drawGrid();
     }
 
@@ -144,14 +136,6 @@ public class GameView {
      */
     public void setScoreText(int score) {
         scoreText.setText(String.format("Score: %s", score));
-    }
-
-    /**
-     * Sets the time text in the game view.
-     * @param time the time to display
-     */
-    public void setTimeText(String time) {
-        timeText.setText(String.format("Time: %s", time));
     }
 
     /**
