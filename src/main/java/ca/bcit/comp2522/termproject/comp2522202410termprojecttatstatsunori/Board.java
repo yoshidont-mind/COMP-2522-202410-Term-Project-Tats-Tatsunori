@@ -3,6 +3,9 @@ package main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstats
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Represents a game board for a block-based puzzle game.
+ */
 public class Board {
     /* constants */
     /**
@@ -243,6 +246,11 @@ public class Board {
         }
     }
 
+    /**
+     * Returns a string representation of the board.
+     *
+     * @return A string that represents the current state of the board.
+     */
     @Override
     public String toString() {
         return "Board{"
@@ -251,6 +259,12 @@ public class Board {
                 + '}';
     }
 
+    /**
+     * Compares this board to another object for equality.
+     *
+     * @param o The object to compare this Board against.
+     * @return true if the given object represents a Board equivalent to this board, false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -258,6 +272,11 @@ public class Board {
         return Arrays.deepEquals(getBlocks(), board.getBlocks());
     }
 
+    /**
+     * Returns a hash code value for the board.
+     *
+     * @return A hash code value for this board.
+     */
     @Override
     public int hashCode() {
         return Arrays.deepHashCode(getBlocks());
