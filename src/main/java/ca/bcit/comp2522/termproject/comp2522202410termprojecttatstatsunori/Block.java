@@ -20,10 +20,10 @@ import javafx.scene.text.Text;
 public class Block {
 
     /** Size of the block */
-    public static int SIZE = 55;
+    public static final int SIZE = 55;
 
     /** Text size within the block */
-    public static int TEXT_SIZE = 20;
+    public static final int TEXT_SIZE = 20;
 
     /** Maximum value that a block can have */
     public static final int MAX_VALUE = 9;
