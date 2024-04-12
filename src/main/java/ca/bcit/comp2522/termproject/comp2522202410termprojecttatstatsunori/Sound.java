@@ -19,7 +19,7 @@ public class Sound {
      * Constructs a Sound object that initializes the media player with the specified music file.
      * @param musicFilePath the path to the music file to be played
      */
-    Sound (String musicFilePath) {
+    public Sound (String musicFilePath) {
         Media media = new Media(new File(musicFilePath).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
     }
