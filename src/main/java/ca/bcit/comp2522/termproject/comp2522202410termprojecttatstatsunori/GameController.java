@@ -62,7 +62,10 @@ public class GameController {
     }
 
     private void handleKeyPress (KeyEvent event) {
-        if (session.isGameOver()) {
+        if (session.isGameOver() || session.getIsPaused()) {
+            if (event.getCode() == KeyCode.SPACE) {
+                session.setPaused();
+            }
             return;
         }
         Block currentBlock = session.getCurrentBlock();
