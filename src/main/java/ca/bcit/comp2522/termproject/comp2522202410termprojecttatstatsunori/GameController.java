@@ -13,26 +13,27 @@ import javafx.scene.input.KeyEvent;
  * @version 2024
  */
 public class GameController {
-
     /**
      * The duration in seconds after which the game speed doubles.
      */
-    public static double SECONDS_TO_DOUBLE_SPEED = 300.0;
+    public static final double SECONDS_TO_DOUBLE_SPEED = 300.0;
 
     /**
      * Path to the sound file played when a block is cleared.
      */
-    public static String clearBlockSoundPath = "sound/clearBlockSound.mp3";
+    public static final String CLEAR_BLOCK_SOUND_PATH = "sound/clearBlockSound.mp3";
 
     /**
      * Path to the sound file played when a block lands.
      */
-    public static String landBlockSoundPath = "sound/landBlockSound.mp3";
+    public static final String LAND_BLOCK_SOUND_PATH = "sound/landBlockSound.mp3";
 
     /**
      * Path to the sound file played when a block is moved.
      */
-    public static String moveBlockSoundPath = "sound/moveBlockSound.mp3";
+    public static final String MOVE_BLOCK_SOUND_PATH = "sound/moveBlockSound.mp3";
+
+    private static final int NANOSECOND_PER_SECOND = 1_000_000_000;
 
     private final GameView gameView;
     private final Session session;
@@ -67,7 +68,7 @@ public class GameController {
         }
         Block currentBlock = session.getCurrentBlock();
         Board board = session.getBoard();
-        Sound moveBlockSound = new Sound(moveBlockSoundPath);
+        Sound moveBlockSound = new Sound(MOVE_BLOCK_SOUND_PATH);
         switch (event.getCode()) {
             case RIGHT -> board.moveBlockByOne(currentBlock, Direction.RIGHT);
             case LEFT -> board.moveBlockByOne(currentBlock, Direction.LEFT);
@@ -105,7 +106,7 @@ public class GameController {
 
                 Block currentBlock = session.getCurrentBlock();
                 Board board = session.getBoard();
-                if (now - lastUpdate >= 1_000_000_000 / session.getGameSpeed()) {
+                if (now - lastUpdate >= NANOSECOND_PER_SECOND / session.getGameSpeed()) {
                     if (board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.DOWN)) {
                         board.moveBlockByOne(currentBlock, Direction.DOWN);
                     } else {
@@ -113,8 +114,8 @@ public class GameController {
                     }
 
                     // update gameSpeed (linear increase)
-                    double incrementPerSecond = (2.0 - 1.0) / SECONDS_TO_DOUBLE_SPEED;
-                    double secondsPerIteration = 1.0 / session.getGameSpeed();
+                    double incrementPerSecond = (double) 1 / SECONDS_TO_DOUBLE_SPEED;
+                    double secondsPerIteration = (double) 1 / session.getGameSpeed();
                     double newGameSpeed = session.getGameSpeed() + incrementPerSecond * secondsPerIteration;
                     session.setGameSpeed(newGameSpeed);
                     gameView.setSpeedText(session.getGameSpeed());
@@ -126,11 +127,11 @@ public class GameController {
 
                 // update game when the bottom of current block hits another block or floor
                 if (!currentBlock.getIsMoving()) {
-                    new Sound(landBlockSoundPath).play();
+                    new Sound(LAND_BLOCK_SOUND_PATH).play();
                     int scoreToAdd = board.processEliminating(currentBlock.getXCoordinate()
                             , currentBlock.getYCoordinate());
                     if (scoreToAdd > 1) {
-                        new Sound(clearBlockSoundPath).play();
+                        new Sound(CLEAR_BLOCK_SOUND_PATH).play();
                     }
                     session.addScore(scoreToAdd); // calculate score
                     gameView.setScoreText(session.getScore());

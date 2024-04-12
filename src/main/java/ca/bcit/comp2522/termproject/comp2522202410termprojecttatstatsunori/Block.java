@@ -150,7 +150,9 @@ public class Block {
      * @return A new Block instance with a random value.
      */
     public static Block createBlock() {
-        return new Block(new Random().nextInt(1, 10));
+        int lowerBound = 1;
+        int upperBound = 10;
+        return new Block(new Random().nextInt(lowerBound, upperBound));
     }
 
     /** Fills the rectangle of the block with its assigned color. */
@@ -160,8 +162,9 @@ public class Block {
 
     /** Updates the position of the text within the block based on the block's size and position. */
     public final void updateTextPosition() {
+        int divisionFactor = 4;
         this.text.setX(this.rectangle.getX() + this.rectangle.getWidth() / 2 - this.text.getBoundsInLocal().getWidth() / 2);
-        this.text.setY(this.rectangle.getY() + this.rectangle.getHeight() / 2 + this.text.getBoundsInLocal().getHeight() / 4);
+        this.text.setY(this.rectangle.getY() + this.rectangle.getHeight() / 2 + this.text.getBoundsInLocal().getHeight() / divisionFactor);
     }
 
     /**
