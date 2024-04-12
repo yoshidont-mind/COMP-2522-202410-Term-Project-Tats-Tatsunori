@@ -121,7 +121,7 @@ public class GameController {
                     gameView.updateBoardDisplay(board);
                     gameView.drawNextBlock(session.getNextBlock());
                     lastUpdate = now;
-                    updateGame();
+                    endGame();
                 }
 
                 // update game when the bottom of current block hits another block or floor
@@ -140,14 +140,14 @@ public class GameController {
                     session.createNextBlock();
                     gameView.updateBoardDisplay(board);
                     gameView.drawNextBlock(session.getNextBlock());
-                    updateGame();
+                    endGame();
                 }
             }
         };
         gameLoop.start();
     }
 
-    private void updateGame() {
+    private void endGame() {
         if (session.getIsGameOver()) {
             gameLoop.stop();
             gameView.showGameOverMessage();
