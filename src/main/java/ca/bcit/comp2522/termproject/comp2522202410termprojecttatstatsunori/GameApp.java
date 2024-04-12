@@ -5,18 +5,18 @@ import javafx.stage.Stage;
 
 public class GameApp extends Application {
 
-    public static String bgmPath = "sound/tetris-theme-korobeiniki-rearranged-arr-for-music-box-184978.mp3";
-    public static String directoryName = "Player";
-    public static String filePath = "Player/player";
+    public static final String BGM_PATH = "sound/tetris-theme-korobeiniki-rearranged-arr-for-music-box-184978.mp3";
+    public static final String DIRECTORY_NAME = "Player";
+    public static final String FILE_PATH = "Player/player";
 
     @Override
     public void start(Stage primaryStage) {
-        Sound bgm = new Sound(bgmPath);
+        Sound bgm = new Sound(BGM_PATH);
         bgm.playBgm();
         GameView gameView = new GameView();
         Session session = new Session();
-        FileCreator.createDirectory(directoryName);
-        Player bestPlayer = FileCreator.deserializePlayer(filePath);
+        FileCreator.createDirectory(DIRECTORY_NAME);
+        Player bestPlayer = FileCreator.deserializePlayer(FILE_PATH);
         int bestScore = bestPlayer != null ? bestPlayer.getBestScore() : 0;
         Player player = new Player(bestScore);
         GameController gameController = new GameController(gameView, session, player);

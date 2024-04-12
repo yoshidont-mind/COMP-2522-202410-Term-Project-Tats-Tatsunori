@@ -153,7 +153,7 @@ public class GameController {
             gameLoop.stop();
             gameView.showGameOverMessage();
             if (player.getBestScore() > bestScoreBeforeGame) {
-                FileCreator.serializeObject(GameApp.filePath, player);
+                FileCreator.serializeObject(GameApp.FILE_PATH, player);
             }
         }
     }
