@@ -1,6 +1,7 @@
 import main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori.Block;
 import main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori.Board;
 import main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori.Direction;
+import java.lang.IllegalArgumentException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -58,7 +59,7 @@ class BoardTest {
         Assertions.assertFalse(board.validateMove(0, 3, Direction.LEFT));
         Assertions.assertFalse(board.validateMove(4, 3, Direction.RIGHT));
         Assertions.assertFalse(board.validateMove(2, 0, Direction.UP));
-        Assertions.assertFalse(board.validateMove(2, 10, Direction.DOWN));
+        Assertions.assertFalse(board.validateMove(2, 9, Direction.DOWN));
     }
 
     @Test
@@ -82,9 +83,9 @@ class BoardTest {
     @Test
     void testMoveBlockByOneOutOfBounds() {
         Block block = new Block(5);
-        board.placeBlock(block, 4, 10);
+        board.placeBlock(block, 4, 9);
         Assertions.assertEquals(0, board.moveBlockByOne(block, Direction.DOWN));
-        Assertions.assertSame(block, board.getBlocks()[4][10]);
+        Assertions.assertSame(block, board.getBlocks()[4][9]);
     }
 
     @Test
