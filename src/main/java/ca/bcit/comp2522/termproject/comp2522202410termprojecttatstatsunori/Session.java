@@ -3,7 +3,13 @@ package main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstats
 import java.time.LocalDateTime;
 import java.util.Random;
 
-
+/**
+ * Represents a game session, managing the state and progression of gameplay, including score, game speed, blocks,
+ * and the game board.
+ *
+ * @author Tatsunori Marumo, Tatsuya Yoshida
+ * @version 2024
+ */
 public class Session {
     /* instance variables */
     private final LocalDateTime startTime;
@@ -77,14 +83,29 @@ public class Session {
         return board;
     }
 
+    /**
+     * Retrieves the current block in play.
+     *
+     * @return The current Block object.
+     */
     public Block getCurrentBlock() {
         return this.currentBlock;
     }
 
+    /**
+     * Retrieves the next block to be played.
+     *
+     * @return The next Block object.
+     */
     public Block getNextBlock() {
         return this.nextBlock;
     }
 
+    /**
+     * Checks if the session is paused.
+     *
+     * @return True if the session is paused, false otherwise.
+     */
     public boolean getIsPaused() {
         return isPaused;
     }
@@ -118,10 +139,18 @@ public class Session {
         this.gameSpeed = gameSpeed;
     }
 
+    /**
+     * Updates the current block to the next block and generates a new next block.
+     */
     public void setCurrentBlock() {
         this.currentBlock = nextBlock;
     }
 
+    /**
+     * Sets the next block to the specified block.
+     *
+     * @param block The new next block as a Block object.
+     */
     public void setNextBlock(Block block) {
         this.nextBlock = block;
     }
@@ -131,10 +160,18 @@ public class Session {
         this.isPaused = !isPaused;
     }
 
+    /**
+     * Adds the specified score to the current session score.
+     *
+     * @param scoreToAdd The score to add as an integer.
+     */
     public void addScore(int scoreToAdd) {
         this.score += scoreToAdd;
     }
 
+    /**
+     * Handles the creation and placement of the next block, updating the current and next blocks.
+     */
     public void createNextBlock() {
         setCurrentBlock();
         setNextBlock(Block.createBlock());
@@ -142,6 +179,11 @@ public class Session {
         board.placeBlock(currentBlock, random.nextInt(0, Board.WIDTH), 0);
     }
 
+    /**
+     * Determines if the game is over based on the ability to move the current block.
+     *
+     * @return True if the game is over, false otherwise.
+     */
     public boolean getIsGameOver() {
         if (!board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.DOWN)
                 && !board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.UP)) {
