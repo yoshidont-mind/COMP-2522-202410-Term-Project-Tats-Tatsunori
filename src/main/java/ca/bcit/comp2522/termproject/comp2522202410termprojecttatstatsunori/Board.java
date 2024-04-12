@@ -5,6 +5,9 @@ import java.util.Arrays;
 
 /**
  * Represents a game board for a block-based puzzle game.
+ *
+ * @author Tatsuya Yoshida, Tatsunori Marumo
+ * @version 2024
  */
 public class Board {
     /* constants */
