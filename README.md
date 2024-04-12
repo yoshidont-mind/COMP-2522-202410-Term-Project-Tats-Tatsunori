@@ -51,6 +51,7 @@ When a block reaches the bottom, the following sequence of block removal and sco
 When the game ends, "GAME OVER" appears, and the game concludes. If the player has beaten the best score, the player file in the Player directory is updated. If the player file does not exist, the program will create this file (and the directory if necessary).
 
 ## Related Links
+- [Play Video (YouTube)](https://youtu.be/gV2Q6PhEKKY)
 - [Mind map (FigJam Board)](https://www.figma.com/file/6bLAycrmsc6pl4sIQ3BrK2/term-project-Tats-Tatsnori?type=whiteboard&node-id=0%3A1&t=Aaqj5ZrGC26gpV8b-1)
 
 ## Indices for required elements
