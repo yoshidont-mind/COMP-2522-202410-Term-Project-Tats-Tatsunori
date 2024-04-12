@@ -79,18 +79,10 @@ public class Board {
     private int[] coordinatesToMoveBy (final Direction direction) {
         int[] coordinatesToMoveBy = {0, 0};
         switch (direction) {
-            case LEFT:
-                coordinatesToMoveBy[0] = -1;
-                break;
-            case RIGHT:
-                coordinatesToMoveBy[0] = 1;
-                break;
-            case UP:
-                coordinatesToMoveBy[1] = -1;
-                break;
-            case DOWN:
-                coordinatesToMoveBy[1] = 1;
-                break;
+            case LEFT -> coordinatesToMoveBy[0] = -1;
+            case RIGHT -> coordinatesToMoveBy[0] = 1;
+           // case UP -> coordinatesToMoveBy[1] = -1;
+            case DOWN -> coordinatesToMoveBy[1] = 1;
         }
         return coordinatesToMoveBy;
     }
