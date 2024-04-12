@@ -98,6 +98,11 @@ public class GameController {
 
             @Override
             public void handle(long now) {
+                // do nothing while pausing
+                if (session.getIsPaused()) {
+                    return;
+                }
+
                 Block currentBlock = session.getCurrentBlock();
                 Board board = session.getBoard();
                 if (now - lastUpdate >= 1_000_000_000 / session.getGameSpeed()) {
