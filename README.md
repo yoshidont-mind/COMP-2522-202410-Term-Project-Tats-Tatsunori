@@ -25,14 +25,14 @@ Seeing is believing! Give it a try right away!
 #### 1.1 Set up
 When you run GameApp.java, the program first tries to load the player file from the Player directory. If the Player/player.ser file does not exist, the command line will display "Could not find the file in: Player/player" and will skip this loading process. Immediately after, a popup screen appears, and the game starts.
 
-#### 1.2 画面上の項目
+#### 1.2 Items on the screen
 The left side of the popup screen displays the blocks, while the right side shows the following items:
 - The next block
 - Best score (if the player file has been loaded successfully, it displays the best score stored in the file; otherwise, it shows 0)
 - Current score
 - Speed (starts at x1.00 and gradually increases over time.)
 
-#### 1.2 画面上の項目
+#### 1.3 Operations
 Players use the following five keys to control the game:
 - Left (←): Moves the currently falling block one space to the left.
 - Right (→): Moves the currently falling block one space to the right.
@@ -40,7 +40,7 @@ Players use the following five keys to control the game:
 - Up (↑): Drops the currently falling block to the bottom.
 - Space: Pauses/resumes the game.
 
-#### 1.2 Rule
+#### 1.4 Rule
 When a block reaches the bottom, the following sequence of block removal and score adjustment occurs:
 1. Starting with the current block, it adds the value of each adjacent block to the left until the sum reaches 10, at which point the blocks are added to the to-get-removed list.
 2. If the wall is reached, or there are no more blocks before the sum reaches 10, the addition operation ends.
@@ -51,7 +51,6 @@ When a block reaches the bottom, the following sequence of block removal and sco
 When the game ends, "GAME OVER" appears, and the game concludes. If the player has beaten the best score, the player file in the Player directory is updated. If the player file does not exist, the program will create this file (and the directory if necessary).
 
 ## Related Links
-- Gameplay video
 - [Mind map (FigJam Board)](https://www.figma.com/file/6bLAycrmsc6pl4sIQ3BrK2/term-project-Tats-Tatsnori?type=whiteboard&node-id=0%3A1&t=Aaqj5ZrGC26gpV8b-1)
 
 ## Indices for required elements
