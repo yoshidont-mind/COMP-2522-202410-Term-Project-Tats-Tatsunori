@@ -59,7 +59,7 @@ public class GameController {
     }
 
     private void handleKeyPress (KeyEvent event) {
-        if (session.isGameOver() || session.getIsPaused()) {
+        if (session.getIsGameOver() || session.getIsPaused()) {
             if (event.getCode() == KeyCode.SPACE) {
                 session.setPaused();
             }
@@ -148,7 +148,7 @@ public class GameController {
     }
 
     private void updateGame() {
-        if (session.isGameOver()) {
+        if (session.getIsGameOver()) {
             gameLoop.stop();
             gameView.showGameOverMessage();
             if (player.getBestScore() > bestScoreBeforeGame) {

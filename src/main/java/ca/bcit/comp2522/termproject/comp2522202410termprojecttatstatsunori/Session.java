@@ -142,7 +142,7 @@ public class Session {
         board.placeBlock(currentBlock, random.nextInt(0, Board.WIDTH), 0);
     }
 
-    public boolean isGameOver() {
+    public boolean getIsGameOver() {
         if (!board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.DOWN)
                 && !board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.UP)) {
             setFinished(true);
