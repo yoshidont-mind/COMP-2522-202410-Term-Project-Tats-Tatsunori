@@ -58,21 +58,18 @@ public final class FileCreator {
     }
 
     /**
-     * Deserializes an object from a file at the specified file path.
+     * Deserializes an instance of Player from a file at the specified file path.
      *
      * @param filePath The file path from which the object will be deserialized
-     * @param <T> The data type
-     * @return The deserialized object, or null if an error occurs during deserialization
+     * @return The deserialized Player, or null if an error occurs during deserialization
      */
-    public static <T> T deserializeObject(final String filePath) {
+    public static Player deserializeObject(final String filePath) {
         if (!Files.exists(Path.of(filePath))) {
             System.out.printf("Could not find the file in: %s\n", filePath);
             return null;
         }
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath))) {
-            T deserializedObject = (T) in.readObject();
-            System.out.println("Object has been deserialized");
-            return deserializedObject;
+            return  (Player) in.readObject();
         } catch (IOException e) {
             System.out.println("Start new game");
         } catch (ClassNotFoundException e) {
