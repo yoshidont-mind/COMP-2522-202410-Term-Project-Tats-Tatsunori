@@ -87,7 +87,7 @@ public class Board {
         switch (direction) {
             case LEFT -> coordinatesToMoveBy[0] = -1;
             case RIGHT -> coordinatesToMoveBy[0] = 1;
-           // case UP -> coordinatesToMoveBy[1] = -1;
+            case UP -> coordinatesToMoveBy[1] = -1;
             case DOWN -> coordinatesToMoveBy[1] = 1;
         }
         return coordinatesToMoveBy;

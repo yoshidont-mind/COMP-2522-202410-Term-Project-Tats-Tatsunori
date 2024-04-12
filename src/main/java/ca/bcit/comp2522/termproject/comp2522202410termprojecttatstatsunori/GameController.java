@@ -133,9 +133,6 @@ public class GameController {
                     gameView.drawNextBlock(session.getNextBlock());
 
                     lastUpdate = now;
-
-                    // Check and handle the end of the game
-                    endGame();
                 }
 
                 // update game when the bottom of current block hits another block or floor
