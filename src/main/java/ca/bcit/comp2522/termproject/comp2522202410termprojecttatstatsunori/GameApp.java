@@ -4,18 +4,35 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
- * The main application class for the game, responsible for initializing and starting the game.
- * This class sets up the game environment, including the background music, game view, session, and player data management.
- * It uses JavaFX for the graphical user interface, making it crucial for launching and displaying the game.
+ * Sets up and starts the JavaFX application.
+ * It initializes the game environment, manages background music, and handles player data persistence.
  *
- * @author The application developer
+ * @author Tatsuya Yoshida, Tatsunori Marumo
+ * @version 2024
  */
 public class GameApp extends Application {
 
+    /**
+     * Path to the background music file.
+     */
     public static final String BGM_PATH = "sound/tetris-theme-korobeiniki-rearranged-arr-for-music-box-184978.mp3";
+
+    /**
+     * Name of the directory where player data is stored.
+     */
     public static final String DIRECTORY_NAME = "Player";
+
+    /**
+     * Path to the serialized player data file.
+     */
     public static final String FILE_PATH = "Player/player";
 
+    /**
+     * Starts the primary stage of the application, setting up the game view, loading player data,
+     * and initiating the game controller.
+     *
+     * @param primaryStage The primary window for this application.
+     */
     @Override
     public void start(Stage primaryStage) {
         Sound bgm = new Sound(BGM_PATH);
@@ -32,6 +49,11 @@ public class GameApp extends Application {
         primaryStage.setOnCloseRequest(event -> bgm.stop());
     }
 
+    /**
+     * The main method to launch the application.
+     *
+     * @param args Command line arguments passed to the application.
+     */
     public static void main(String[] args) {
         launch(args);
     }
