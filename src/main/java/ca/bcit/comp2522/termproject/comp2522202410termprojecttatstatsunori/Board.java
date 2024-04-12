@@ -259,48 +259,6 @@ public class Board {
         }
     }
 
-//    /* Checks a row, and kill blocks if the condition is met */
-//    private void seeRow(final int yCoordinate) {
-//        if (yCoordinate < 0 || yCoordinate >= HEIGHT) {
-//            throw new IllegalArgumentException("yCoordinate must be between 0 and HEIGHT - 1");
-//        } else {
-//            // initialize local variables
-//            int sum = 0;
-//            int currentX = 0;
-//            ArrayList<Block> blocksUnderExamination = new ArrayList<>();
-//
-//            // check sum of block chunks one by one until reaching wall
-//            while (currentX < WIDTH) {
-//                // if the next block is null, that means reaching end of a block chunk
-//                if (this.blocks[currentX][yCoordinate] == null) {
-//                    // if sum of the block chunk is OBJECTIVE_SUM, kill blocks in the chunk
-//                    if (sum == OBJECTIVE_SUM) {
-//                        for (Block block: blocksUnderExamination) {
-//                            block.setIsAlive(false);
-//                        }
-//                    }
-//
-//                    // reset sum and arrayList
-//                    sum = 0;
-//                    blocksUnderExamination.clear();
-//                } else {
-//                    // if the next block exists, add it to arrayList and add the value to sum
-//                    Block currentBlock = this.blocks[currentX][yCoordinate];
-//                    sum += currentBlock.getValue();
-//                    blocksUnderExamination.add(currentBlock);
-//                }
-//                currentX++; // increment currentX to see the next block
-//            }
-//
-//            // when reach the right-most block, check if it becomes 10 once again
-//            if (sum == OBJECTIVE_SUM) {
-//                for (Block block: blocksUnderExamination) {
-//                    block.setIsAlive(false);
-//                }
-//            }
-//        }
-//    }
-
     /* Removes dead blocks. */
     private int removeDeadBlocks() {
         int removedBlocks = 0;
@@ -331,11 +289,7 @@ public class Board {
         } else if (this.blocks[xCoordinate][yCoordinate] == null) {
             throw new IllegalArgumentException("There must exist a block at given coordinates");
         } else {
-//            // Option A: horizontal blocks get removed only when sum of the chunk get the objective number
-//            this.seeRow(yCoordinate);
-//            this.seeDownwards(xCoordinate, yCoordinate);
-
-            // Option B: horizontal blocks get removed in the same logic as downward
+            // see directions one by one to change isAlive of blocks
             this.seeOneDirection(xCoordinate, yCoordinate, Direction.LEFT);
             this.seeOneDirection(xCoordinate, yCoordinate, Direction.RIGHT);
             this.seeOneDirection(xCoordinate, yCoordinate, Direction.DOWN);
