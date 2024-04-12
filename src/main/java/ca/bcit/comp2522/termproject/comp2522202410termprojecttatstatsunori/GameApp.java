@@ -25,7 +25,7 @@ public class GameApp extends Application {
     /**
      * Path to the serialized player data file.
      */
-    public static final String FILE_PATH = "Player/player";
+    public static final String FILE_PATH = "Player/player.ser";
 
     /**
      * Starts the primary stage of the application, setting up the game view, loading player data,
