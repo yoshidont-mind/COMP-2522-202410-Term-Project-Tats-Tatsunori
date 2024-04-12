@@ -97,6 +97,11 @@ public class GameController {
 
             private long lastUpdate = 0;
 
+            /**
+             * Handles the game logic at each frame of the animation timer. This method is called in each frame
+             *
+             * @param now The current timestamp of the frame in nanoseconds.
+             */
             @Override
             public void handle(long now) {
                 // do nothing while pausing
@@ -106,7 +111,10 @@ public class GameController {
 
                 Block currentBlock = session.getCurrentBlock();
                 Board board = session.getBoard();
+
+                // Perform game updates at intervals based on the game speed
                 if (now - lastUpdate >= NANOSECOND_PER_SECOND / session.getGameSpeed()) {
+                    // Attempt to move the current block down; if it cannot move, the block has landed
                     if (board.validateMove(currentBlock.getXCoordinate(), currentBlock.getYCoordinate(), Direction.DOWN)) {
                         board.moveBlockByOne(currentBlock, Direction.DOWN);
                     } else {
@@ -118,10 +126,15 @@ public class GameController {
                     double secondsPerIteration = (double) 1 / session.getGameSpeed();
                     double newGameSpeed = session.getGameSpeed() + incrementPerSecond * secondsPerIteration;
                     session.setGameSpeed(newGameSpeed);
+
+                    // Update the game view to reflect the new state
                     gameView.setSpeedText(session.getGameSpeed());
                     gameView.updateBoardDisplay(board);
                     gameView.drawNextBlock(session.getNextBlock());
+
                     lastUpdate = now;
+
+                    // Check and handle the end of the game
                     endGame();
                 }
 
