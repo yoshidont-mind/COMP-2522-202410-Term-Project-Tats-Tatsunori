@@ -9,8 +9,8 @@ A01361712, A01327744
 ## Our GitHub names:
 yoshidont-mind, TatsunoriMarumo
 
-## Any important comments you'd like to make about your work:
-
+## Important comments we'd like to make about our work:
+When you clone the repository, IntelliJ might consider src > main > java directory as Sources Root, and that would cause a compile error. If that happens, please right-click on that directory, and choose "Mark directory as", then "Unmark as Sources Root". 
 
 ## About this game
 ### __0. Overview：__
