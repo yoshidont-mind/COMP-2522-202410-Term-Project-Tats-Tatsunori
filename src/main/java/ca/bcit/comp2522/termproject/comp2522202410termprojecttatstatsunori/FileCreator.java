@@ -80,21 +80,4 @@ public final class FileCreator {
         }
         return null;
     }
-
-    /**
-     * Checks the equality of the original and deserialized objects and prints the result.
-     *
-     * @param original The original object before serialization
-     * @param deserialized The deserialized object to compare with the original
-     * @param <T> The data type
-     */
-    public static <T> void checkEquality(final T original, final T deserialized) {
-        if (original == null || deserialized == null) {
-            System.out.println("One of the objects is null, cannot compare equality.");
-            return;
-        }
-
-        boolean isEqual = original.equals(deserialized);
-        System.out.printf("Original: %s\nDeserialized: %s\nThey are equal: %b\n\n", original, deserialized, isEqual);
-    }
 }
