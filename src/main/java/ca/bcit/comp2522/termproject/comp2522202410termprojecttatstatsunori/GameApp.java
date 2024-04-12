@@ -16,7 +16,7 @@ public class GameApp extends Application {
         GameView gameView = new GameView();
         Session session = new Session();
         FileCreator.createDirectory(directoryName);
-        Player bestPlayer = FileCreator.deserializeObject(filePath);
+        Player bestPlayer = FileCreator.deserializePlayer(filePath);
         int bestScore = bestPlayer != null ? bestPlayer.getBestScore() : 0;
         Player player = new Player(bestScore);
         GameController gameController = new GameController(gameView, session, player);

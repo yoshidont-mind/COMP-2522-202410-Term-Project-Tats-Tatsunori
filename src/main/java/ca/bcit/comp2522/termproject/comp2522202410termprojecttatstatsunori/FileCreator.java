@@ -63,7 +63,7 @@ public final class FileCreator {
      * @param filePath The file path from which the object will be deserialized
      * @return The deserialized Player, or null if an error occurs during deserialization
      */
-    public static Player deserializeObject(final String filePath) {
+    public static Player deserializePlayer(final String filePath) {
         if (!Files.exists(Path.of(filePath))) {
             System.out.printf("Could not find the file in: %s\n", filePath);
             return null;
