@@ -54,7 +54,7 @@ public class GameController {
         gameView.setBestScoreText(player.getBestScore());
     }
 
-    private final void initializeControls() {
+    private void initializeControls() {
         gameView.getScene().setOnKeyPressed(this::handleKeyPress);
     }
 

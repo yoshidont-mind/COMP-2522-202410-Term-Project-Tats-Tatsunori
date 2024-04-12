@@ -35,7 +35,7 @@ public class Block {
     private Color color;
     private boolean isAlive;
     private boolean isMoving;
-    private Text text;
+    private final Text text;
 
     /**
      * Constructs a Block with a specified value, initializing its appearance and state.
@@ -49,8 +49,7 @@ public class Block {
         this.rectangle = new Rectangle(SIZE - 1, SIZE - 1);
         this.text = new Text(String.valueOf(value));
         text.setFont(Font.font("Arial", FontWeight.BOLD, TEXT_SIZE));
-        this.text.setX(this.rectangle.getX() + this.rectangle.getWidth() / 2 - this.text.getBoundsInLocal().getWidth() / 2);
-        this.text.setY(this.rectangle.getY() + this.rectangle.getHeight() / 2 + this.text.getBoundsInLocal().getHeight() / 4);
+        updateTextPosition();
         assignColor(this.value);
         fillColor();
         this.isAlive = true;
@@ -160,7 +159,7 @@ public class Block {
     }
 
     /** Updates the position of the text within the block based on the block's size and position. */
-    public void updateTextPosition() {
+    public final void updateTextPosition() {
         this.text.setX(this.rectangle.getX() + this.rectangle.getWidth() / 2 - this.text.getBoundsInLocal().getWidth() / 2);
         this.text.setY(this.rectangle.getY() + this.rectangle.getHeight() / 2 + this.text.getBoundsInLocal().getHeight() / 4);
     }

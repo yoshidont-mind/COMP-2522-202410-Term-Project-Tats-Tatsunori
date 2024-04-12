@@ -30,15 +30,13 @@ public class GameView {
     public static int BEST_SCORE_TEXT_Y = 200;
     public static int SCORE_TEXT_Y = 250;
     public static int GAME_SPEED_Y = 300;
-    private List<Node> permanentUIComponents;
-    private Pane group;
-    private Pane whiteBackGround;
+    private final List<Node> permanentUIComponents;
+    private final Pane group;
     private Text nextBlockText;
     private Text scoreText;
     private Text bestScoreText;
     private Text speedText;
-    private Scene scene;
-    private Line line;
+    private final Scene scene;
     public static final int MAX_X = Board.WIDTH * Block.SIZE;
     public static final int MAX_Y = Board.HEIGHT * Block.SIZE;
 
@@ -47,7 +45,7 @@ public class GameView {
      */
     public GameView() {
         this.group = new Pane();
-        this.whiteBackGround = new Pane();
+        Pane whiteBackGround = new Pane();
         this.permanentUIComponents = new ArrayList<>();
         group.setStyle("-fx-background-color: black");
         whiteBackGround.setStyle("-fx-background-color: white");
@@ -60,8 +58,7 @@ public class GameView {
         initializeUIComponents();
     }
 
-    private final void initializeUIComponents() {
-        line = new Line(MAX_X, 0, MAX_X, MAX_Y);
+    private void initializeUIComponents() {
 
         // set next block text
         this.nextBlockText = new Text("Next Block");
@@ -91,7 +88,7 @@ public class GameView {
         speedText.setX(MAX_X + TEXT_POSITION_X);
         speedText.setFill(Color.BLACK);
 
-        group.getChildren().addAll(nextBlockText, bestScoreText, scoreText, line, speedText);
+        group.getChildren().addAll(nextBlockText, bestScoreText, scoreText, speedText);
         drawGrid();
     }
 
@@ -161,8 +158,8 @@ public class GameView {
         rectangle.setX(MAX_X + 50);
         rectangle.setY(NEXT_BLOCK_Y + 20);
         Text text = nextBlock.getText();
-        text.setX(rectangle.getX() + Block.SIZE / 2 - text.getBoundsInLocal().getWidth() / 2);
-        text.setY(rectangle.getY() + Block.SIZE / 2 + text.getBoundsInLocal().getHeight() / 4);
+        text.setX(rectangle.getX() + (double) Block.SIZE / 2 - text.getBoundsInLocal().getWidth() / 2);
+        text.setY(rectangle.getY() + (double) Block.SIZE / 2 + text.getBoundsInLocal().getHeight() / 4);
         group.getChildren().addAll(rectangle, text);
     }
 
@@ -182,8 +179,7 @@ public class GameView {
                     rectangle.setX(x * Block.SIZE);
                     rectangle.setY(y * Block.SIZE);
                     Text text = block.getText();
-                    text.setX(rectangle.getX() + Block.SIZE / 2 - text.getBoundsInLocal().getWidth() / 2);
-                    text.setY(rectangle.getY() + Block.SIZE / 2 + text.getBoundsInLocal().getHeight() / 4);
+                    block.updateTextPosition();
                     group.getChildren().addAll(rectangle, text);
                 }
             }

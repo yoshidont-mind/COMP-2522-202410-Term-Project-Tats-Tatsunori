@@ -1,6 +1,5 @@
 package main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Random;
 
@@ -11,7 +10,7 @@ public class Session {
     private int score;
     private boolean isFinished;
     private double gameSpeed;
-    private Board board;
+    private final Board board;
     private Block currentBlock;
     private Block nextBlock;
     private boolean isPaused;
