@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Manages the graphics of the game, handling the rendering of game components like the grid, score, time, and speed,
@@ -263,5 +264,30 @@ public class GameView {
         gameOverText.setX(GAME_OVER_MESSAGE_X);
         gameOverText.setY(GAME_OVER_MESSAGE_Y);
         group.getChildren().add(gameOverText);
+    }
+
+    @Override
+    public String toString() {
+        return "GameView{"
+                + "permanentUIComponents=" + permanentUIComponents
+                + ", group=" + group
+                + ", nextBlockText=" + nextBlockText
+                + ", scoreText=" + scoreText
+                + ", bestScoreText=" + bestScoreText
+                + ", speedText=" + speedText
+                + ", scene=" + scene
+                + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof GameView gameView)) return false;
+        return Objects.equals(permanentUIComponents, gameView.permanentUIComponents) && Objects.equals(getGroup(), gameView.getGroup()) && Objects.equals(nextBlockText, gameView.nextBlockText) && Objects.equals(scoreText, gameView.scoreText) && Objects.equals(bestScoreText, gameView.bestScoreText) && Objects.equals(speedText, gameView.speedText) && Objects.equals(getScene(), gameView.getScene());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(permanentUIComponents, getGroup(), nextBlockText, scoreText, bestScoreText, speedText, getScene());
     }
 }

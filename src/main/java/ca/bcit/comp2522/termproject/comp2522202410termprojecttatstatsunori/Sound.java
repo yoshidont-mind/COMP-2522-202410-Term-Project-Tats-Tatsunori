@@ -4,6 +4,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.Media;
 
 import java.io.File;
+import java.util.Objects;
 
 /**
  * Encapsulates the functionality of playing audio files in the game.
@@ -52,5 +53,24 @@ public class Sound {
     public void stop() {
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.play();
+    }
+
+    @Override
+    public String toString() {
+        return "Sound{"
+                + "mediaPlayer=" + mediaPlayer
+                + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Sound sound)) return false;
+        return Objects.equals(getMediaPlayer(), sound.getMediaPlayer());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getMediaPlayer());
     }
 }

@@ -49,6 +49,11 @@ public class GameApp extends Application {
         primaryStage.setOnCloseRequest(event -> bgm.stop());
     }
 
+    @Override
+    public String toString() {
+        return "GameApp{}";
+    }
+
     /**
      * The main method to launch the application.
      *

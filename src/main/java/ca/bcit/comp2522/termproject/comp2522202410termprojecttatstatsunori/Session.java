@@ -1,6 +1,7 @@
 package main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -190,5 +191,31 @@ public class Session {
             setFinished(true);
         }
         return getFinished();
+    }
+
+    @Override
+    public String toString() {
+        return "Session{"
+                + "startTime=" + startTime
+                + ", score=" + score
+                + ", isFinished=" + isFinished
+                + ", gameSpeed=" + gameSpeed
+                + ", board=" + board
+                + ", currentBlock=" + currentBlock
+                + ", nextBlock=" + nextBlock
+                + ", isPaused=" + isPaused
+                + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Session session)) return false;
+        return getScore() == session.getScore() && getFinished() == session.getFinished() && Double.compare(getGameSpeed(), session.getGameSpeed()) == 0 && isPaused == session.isPaused && Objects.equals(getStartTime(), session.getStartTime()) && Objects.equals(getBoard(), session.getBoard()) && Objects.equals(getCurrentBlock(), session.getCurrentBlock()) && Objects.equals(getNextBlock(), session.getNextBlock());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getStartTime(), getScore(), getFinished(), getGameSpeed(), getBoard(), getCurrentBlock(), getNextBlock(), isPaused);
     }
 }

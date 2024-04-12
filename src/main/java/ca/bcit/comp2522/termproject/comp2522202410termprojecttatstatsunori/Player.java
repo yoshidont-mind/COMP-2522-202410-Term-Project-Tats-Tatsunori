@@ -1,6 +1,7 @@
 package main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Represents a player in the game, storing and managing player-specific data such as the best score.
@@ -36,5 +37,24 @@ public class Player implements Serializable {
      */
     public void setBestScore(int bestScore) {
         this.bestScore = bestScore;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{"
+                + "bestScore=" + bestScore
+                + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Player player)) return false;
+        return getBestScore() == player.getBestScore();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getBestScore());
     }
 }

@@ -167,6 +167,20 @@ public class Block {
         this.text.setY(this.rectangle.getY() + this.rectangle.getHeight() / 2 + this.text.getBoundsInLocal().getHeight() / divisionFactor);
     }
 
+    @Override
+    public String toString() {
+        return "Block{"
+                + "rectangle=" + rectangle
+                + ", value=" + value
+                + ", xCoordinate=" + xCoordinate
+                + ", yCoordinate=" + yCoordinate
+                + ", color=" + color
+                + ", isAlive=" + isAlive
+                + ", isMoving=" + isMoving
+                + ", text=" + text
+                + '}';
+    }
+
     /**
      * Compares this block to another object to determine equality.
      *

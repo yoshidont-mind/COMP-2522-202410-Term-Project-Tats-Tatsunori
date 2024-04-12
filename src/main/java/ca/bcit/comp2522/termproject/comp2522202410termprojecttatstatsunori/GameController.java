@@ -4,6 +4,8 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+import java.util.Objects;
+
 /**
  * Handles the game logic and user interactions in the game, manages the game loop, processes key presses,
  * and updates the game state.
@@ -166,5 +168,28 @@ public class GameController {
                 FileCreator.serializePlayer(GameApp.FILE_PATH, player);
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return "GameController{"
+                + "gameView=" + gameView
+                + ", session=" + session
+                + ", player=" + player
+                + ", bestScoreBeforeGame=" + bestScoreBeforeGame
+                + ", gameLoop=" + gameLoop
+                + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof GameController that)) return false;
+        return bestScoreBeforeGame == that.bestScoreBeforeGame && Objects.equals(gameView, that.gameView) && Objects.equals(session, that.session) && Objects.equals(player, that.player) && Objects.equals(gameLoop, that.gameLoop);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(gameView, session, player, bestScoreBeforeGame, gameLoop);
     }
 }

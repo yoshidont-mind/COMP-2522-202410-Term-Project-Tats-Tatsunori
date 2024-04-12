@@ -64,7 +64,6 @@ public class Board {
         }
     }
 
-
     /**
      * Remove specified Block if it exists on this board, and return the number of removed Blocks.
      *
@@ -257,8 +256,7 @@ public class Board {
     @Override
     public String toString() {
         return "Board{"
-                + "blocks="
-                + Arrays.toString(blocks)
+                + "blocks=" + Arrays.toString(blocks)
                 + '}';
     }
 
