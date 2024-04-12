@@ -23,13 +23,17 @@ import java.util.List;
  * @version 2024
  */
 public class GameView {
-    public static int TEXT_POSITION_X = 30;
-    public static int TEXT_SIZE = 20;
-    public static int TEXT_FIELD_WIDTH = 200;
-    public static int NEXT_BLOCK_Y = 50;
-    public static int BEST_SCORE_TEXT_Y = 200;
-    public static int SCORE_TEXT_Y = 250;
-    public static int GAME_SPEED_Y = 300;
+    public static final int TEXT_POSITION_X = 30;
+    public static final int TEXT_SIZE = 20;
+    public static final int TEXT_FIELD_WIDTH = 200;
+    public static final int NEXT_BLOCK_X = 50;
+    public static final int NEXT_BLOCK_Y = 70;
+    public static final int NEXT_BLOCK_TEXT_Y = 50;
+    public static final int BEST_SCORE_TEXT_Y = 200;
+    public static final int SCORE_TEXT_Y = 250;
+    public static final int GAME_SPEED_Y = 300;
+    public static final int GAME_OVER_MESSAGE_X = 100;
+    public static final int GAME_OVER_MESSAGE_Y = 150;
     private final List<Node> permanentUIComponents;
     private final Pane group;
     private Text nextBlockText;
@@ -63,7 +67,7 @@ public class GameView {
         // set next block text
         this.nextBlockText = new Text("Next Block");
         nextBlockText.setFont(Font.font("arial", TEXT_SIZE));
-        nextBlockText.setY(NEXT_BLOCK_Y);
+        nextBlockText.setY(NEXT_BLOCK_TEXT_Y);
         nextBlockText.setX(MAX_X + TEXT_POSITION_X);
         nextBlockText.setFill(Color.BLACK);
 
@@ -155,11 +159,10 @@ public class GameView {
 
     public void drawNextBlock(Block nextBlock) {
         Rectangle rectangle = nextBlock.getRectangle();
-        rectangle.setX(MAX_X + 50);
-        rectangle.setY(NEXT_BLOCK_Y + 20);
+        rectangle.setX(MAX_X + NEXT_BLOCK_X);
+        rectangle.setY(NEXT_BLOCK_Y);
         Text text = nextBlock.getText();
-        text.setX(rectangle.getX() + (double) Block.SIZE / 2 - text.getBoundsInLocal().getWidth() / 2);
-        text.setY(rectangle.getY() + (double) Block.SIZE / 2 + text.getBoundsInLocal().getHeight() / 4);
+        nextBlock.updateTextPosition();
         group.getChildren().addAll(rectangle, text);
     }
 
@@ -193,8 +196,8 @@ public class GameView {
         Text gameOverText = new Text("GAME OVER");
         gameOverText.setFont(Font.font("Arial", FontWeight.BOLD, TEXT_SIZE * 2));
         gameOverText.setFill(Color.RED);
-        gameOverText.setX(100);
-        gameOverText.setY(150);
+        gameOverText.setX(GAME_OVER_MESSAGE_X);
+        gameOverText.setY(GAME_OVER_MESSAGE_Y);
         group.getChildren().add(gameOverText);
     }
 }
