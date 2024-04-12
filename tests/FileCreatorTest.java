@@ -3,8 +3,6 @@ import main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsu
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 

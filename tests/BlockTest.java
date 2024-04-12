@@ -1,13 +1,5 @@
 import main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori.Block;
-
 import javafx.scene.paint.Color;
-
-import java.util.Objects;
-import java.util.Random;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

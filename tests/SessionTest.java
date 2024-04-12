@@ -1,8 +1,6 @@
 import main.java.ca.bcit.comp2522.termproject.comp2522202410termprojecttatstatsunori.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.time.LocalDateTime;
-import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
