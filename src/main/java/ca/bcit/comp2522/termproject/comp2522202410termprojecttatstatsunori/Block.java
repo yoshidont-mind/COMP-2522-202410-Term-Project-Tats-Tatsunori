@@ -92,13 +92,6 @@ public class Block {
         return text;
     }
 
-    /** Sets the value of the block. */
-    public final void setValue(int value) {
-        if (0 <= value && value <= MAX_VALUE) {
-            this.value = value;
-        }
-    }
-
     /** Sets the X coordinate of the block. */
     public final void setXCoordinate(final int xCoordinate) {
         this.xCoordinate = xCoordinate;
