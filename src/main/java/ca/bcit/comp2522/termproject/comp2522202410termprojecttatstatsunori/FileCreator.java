@@ -37,21 +37,19 @@ public final class FileCreator {
     }
 
     /**
-     * Serializes an object and writes it to a file at the specified file path.
+     * Serializes an instance of Player and writes it to a file at the specified file path.
      *
      * @param filePath The file path where the object will be serialized and saved
-     * @param object The object to be serialized
-     * @param <T> The data type
+     * @param player The object to be serialized
      */
-    public static <T> void serializeObject(final String filePath, final T object) {
+    public static void serializePlayer(final String filePath, final Player player) {
         Path path = Path.of(filePath);
         if (!Files.exists(path.getParent())) {
             System.out.printf("Could not find the file in: %s\n", filePath);
             return;
         }
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filePath))) {
-            out.writeObject(object);
-            System.out.println("Object has been serialized");
+            out.writeObject(player);
         } catch (IOException e) {
             System.err.printf("An error occurred during serialization: %s\n", e.getMessage());
         }
