@@ -15,25 +15,79 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Manages the graphics of the game.
- * It handles the rendering of game components like the grid, score, time, and speed,
+ * Manages the graphics of the game, handling the rendering of game components like the grid, score, time, and speed,
  * as well as updating the display during gameplay.
  *
  * @author Tatsunori Marumo, Tatsuya Yoshida
  * @version 2024
  */
 public class GameView {
+
+    /**
+     * X position for displaying text in the UI.
+     */
     public static final int TEXT_POSITION_X = 30;
+
+    /**
+     * Standard size for text elements in the UI.
+     */
     public static final int TEXT_SIZE = 20;
+
+    /**
+     * Width of the text field area in the UI.
+     */
     public static final int TEXT_FIELD_WIDTH = 200;
+
+    /**
+     * X position where the next block preview is displayed.
+     */
     public static final int NEXT_BLOCK_X = 50;
+
+    /**
+     * Y position where the next block preview is displayed.
+     */
     public static final int NEXT_BLOCK_Y = 70;
+
+    /**
+     * Y position for the text indicating "Next Block".
+     */
     public static final int NEXT_BLOCK_TEXT_Y = 50;
+
+    /**
+     * Y position for displaying the best score text.
+     */
     public static final int BEST_SCORE_TEXT_Y = 200;
+
+    /**
+     * Y position for displaying the current score text.
+     */
     public static final int SCORE_TEXT_Y = 250;
+
+    /**
+     * Y position for displaying the game speed.
+     */
     public static final int GAME_SPEED_Y = 300;
+
+    /**
+     * X position for displaying the game over message.
+     */
     public static final int GAME_OVER_MESSAGE_X = 100;
+
+    /**
+     * Y position for displaying the game over message.
+     */
     public static final int GAME_OVER_MESSAGE_Y = 150;
+
+    /**
+     * Maximum width of the game board.
+     */
+    public static final int MAX_X = Board.WIDTH * Block.SIZE;
+
+    /**
+     * Maximum height of the game board.
+     */
+    public static final int MAX_Y = Board.HEIGHT * Block.SIZE;
+
     private final List<Node> permanentUIComponents;
     private final Pane group;
     private Text nextBlockText;
@@ -41,8 +95,6 @@ public class GameView {
     private Text bestScoreText;
     private Text speedText;
     private final Scene scene;
-    public static final int MAX_X = Board.WIDTH * Block.SIZE;
-    public static final int MAX_Y = Board.HEIGHT * Block.SIZE;
 
     /**
      * Constructs a GameView object and initializes the UI components.
@@ -127,6 +179,11 @@ public class GameView {
         return group;
     }
 
+    /**
+     * Sets the best score text in the game view.
+     *
+     * @param bestScore the best score to display
+     */
     public void setBestScoreText(int bestScore) {
         bestScoreText.setText(String.format("Best Score: %s", bestScore));
     }
@@ -157,6 +214,13 @@ public class GameView {
         stage.show();
     }
 
+    /**
+     * Draws the next block to be played on the UI. This block is displayed in a designated area of the UI,
+     * giving players a preview of what block will come next in the game.
+     *
+     * @param nextBlock the next block object to be drawn. This object must not be null and should have
+     *                  initialized shape and text properties to ensure correct rendering on the UI.
+     */
     public void drawNextBlock(Block nextBlock) {
         Rectangle rectangle = nextBlock.getRectangle();
         rectangle.setX(MAX_X + NEXT_BLOCK_X);
