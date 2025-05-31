@@ -1,10 +1,8 @@
 # COMP-2522-202410-Term-Project
 
-## Our names:
-Tatsuya Yoshida (Set E), Tatsunori Marumo (Set F)
+## Our names (Removed):
 
-## Our student numbers:
-A01361712, A01327744
+## Our student numbers (Removed):
 
 ## Our GitHub names:
 yoshidont-mind, TatsunoriMarumo
